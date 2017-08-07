@@ -1,0 +1,12 @@
+.idea
+.vscode
+/logs
+.log
+.pid
+.DS_Store
+node_modules
+*.lock
+!yarn.lock
+package-lock.json
+dist/
+assets/build

@@ -1,0 +1,23 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "max-len": [0],
+    "no-console": [0],
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "no-underscore-dangle": ["error", { "allow": ["_", "_GET", "_POST", "_id", "_ERROR", "_USER", "__INITIAL_STATE__"] }],
+    "no-unused-expressions": [0, { "allowTernary": true }],
+    "no-nested-ternary": [0],
+    "no-param-reassign": [0],
+    "no-plusplus": [0],
+    "newline-per-chained-call": [0],
+    "semi": ["error", "always"]
+  }
+}

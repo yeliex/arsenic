@@ -1,0 +1,35 @@
+{
+  "name": "fundations",
+  "version": "1.0.0",
+  "description": "beesport node fundations",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "lint": "eslint ./ --fix",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.117sport.com:server/node-fundations.git"
+  },
+  "keywords": [
+    "beesport",
+    "node",
+    "fundations"
+  ],
+  "author": "yeliex",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "autofetch": "^3.0.6",
+    "koa-response": "^2.1.0",
+    "raven": "^2.1.1",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "eslint": "^4.4.0",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
