@@ -15,6 +15,7 @@ stages:
 init:
   stage: init
   script:
+    - npm install yarn -g --registry=https://registry.npm.taobao.org/
     - yarn --prod=false
 
 test:
