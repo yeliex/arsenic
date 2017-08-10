@@ -35,13 +35,17 @@ module.exports = function Server({ cwd = process.cwd() } = {}) {
 
   app.on('error', errorHandler);
 
-  router.all('*', async (ctx) => {
-    ctx.throw();
-  });
-
-  app.use(router.routes()).use(router.allowedMethods({ throw: true }));
+  app.router = router;
 
   app.listen = (port, callback) => {
+    router.all('*', async (ctx) => {
+      ctx.throw();
+    });
+
+    app.use(router.routes()).use(router.allowedMethods({ throw: true }));
+
+    delete app.router;
+
     const server = http.createServer(app.callback());
     server.listen(port, () => {
       if (server.listening) {
