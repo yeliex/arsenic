@@ -1,0 +1,23 @@
+before_script:
+  - export NVM_DIR="$HOME/.nvm"
+  - \. "$NVM_DIR/nvm.sh"
+  - nvm install stable
+  - nvm use stable
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - init
+  - test
+
+init:
+  stage: init
+  script:
+    - yarn --prod=false
+
+test:
+  stage: test
+  script:
+    - npm run test
