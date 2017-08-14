@@ -26,18 +26,26 @@ module.exports = function Server({ cwd = process.cwd() } = {}) {
 
   app.config = config;
 
+  const logger = loaders.logger;
+
+  logger.regist(app.config);
+
+  app.logger = logger;
+
   app.use(compose([].concat(
     config.middleware(),
     [
-      middlewares.healthCheck(),
-      middlewares.response(),
-      middlewares.errorHandler(),
-      middlewares.headers(),
-      middlewares.fetch()
+      middlewares.healthCheck(app.config),
+      logger.middleware(),
+      logger.accessMiddleware(),
+      middlewares.response(app.config),
+      middlewares.errorHandler(app.config),
+      middlewares.headers(app.config),
+      middlewares.fetch(app.config)
     ],
-    loaders.service({ cwd }),
-    loaders.controller({ cwd }),
-    loaders.router({ cwd })
+    loaders.service(app.config),
+    loaders.controller(app.config),
+    loaders.router(app.config)
   )));
 
   app.on('error', errorHandler);
