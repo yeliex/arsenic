@@ -33,6 +33,7 @@
     "koa-response": "^2.1.0",
     "koa-router": "^7.2.1",
     "lodash": "^4.17.4",
+    "minimist": "^1.2.0",
     "node-fetch": "^1.7.2",
     "raven": "^2.1.1",
     "ua-parser": "^0.3.5",

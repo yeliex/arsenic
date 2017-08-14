@@ -20,9 +20,14 @@ process.on('unhandledRejection', (e) => {
 });
 
 module.exports = function Server({ cwd = process.cwd() } = {}) {
+  const config = loaders.config({ cwd });
+
   const app = new Koa();
 
+  app.config = config;
+
   app.use(compose([].concat(
+    config.middleware(),
     [
       middlewares.healthCheck(),
       middlewares.response(),
