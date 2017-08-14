@@ -1,7 +1,7 @@
 {
-  "name": "foundation",
+  "name": "arsenic",
   "version": "1.0.0",
-  "description": "beesport node fundations",
+  "description": "beesport node base server",
   "main": "src/index.js",
   "private": true,
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.117sport.com:server/node-fundations.git"
+    "url": "git@gitlab.117sport.com:packages/arsenic.git"
   },
   "keywords": [
     "beesport",
