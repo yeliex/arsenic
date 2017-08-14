@@ -1,9 +1,14 @@
+/**
+ * Controllers Middlweare
+ * read controllers and mount
+ */
+
 const { resolve } = require('path');
-const { existsSync, dirExistsSync } = require('../../libs/utils/fs');
-const requireContext = require('../../libs/utils/require-context');
+const { existsSync, dirExistsSync } = require('../../libs/utils/fs/index');
+const requireContext = require('../../libs/utils/require_context/index');
 
 module.exports = ({ cwd }) => {
-  const path = resolve(cwd, './controllers');
+  const path = resolve(cwd, './controller');
 
   if (!dirExistsSync(path)) {
     console.warn(`Controllers not exist: ${path}`);
@@ -13,8 +18,9 @@ module.exports = ({ cwd }) => {
     };
   }
 
-  const controllers = requireContext('*.js', {
-    cwd: path
+  const controllers = requireContext('./*', {
+    cwd: path,
+    exclude: /\.js$/
   });
 
   const keys = Object.keys(controllers);
@@ -24,7 +30,7 @@ module.exports = ({ cwd }) => {
   }
 
   return async (ctx, next) => {
-    ctx.controller = keys.reduce((total, key) => {
+    ctx.Controller = keys.reduce((total, key) => {
       total[key] = new controllers[key](ctx);
       return total;
     }, {});

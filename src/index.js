@@ -1,7 +1,6 @@
 const Server = require('./server');
 
-Server.middleware = require('./middlewares');
-Server.enum = require('./enums');
-Server.Context = require('./classes/Context');
+Server.Context = require('./classes/context');
+Server.Router = require('./classes/router');
 
 module.exports = Server;

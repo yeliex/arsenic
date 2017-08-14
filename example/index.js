@@ -5,7 +5,7 @@ const app = new App({
 });
 
 app.router.get('*', async (ctx) => {
-  console.log(ctx.controller);
+  //console.log(ctx.controller);
 });
 
 app.listen(8000, (listening) => {

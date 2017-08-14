@@ -5,8 +5,9 @@ const koaBody = require('koa-better-body');
 const convert = require('koa-convert');
 const compose = require('koa-compose');
 
-const middleware = require('../middlewares/index');
-const errorHandler = require('../libs/errorHandler');
+const middlewares = require('../middlewares');
+const loaders = require('../loaders');
+const errorHandler = require('../libs/error_handler');
 
 process.on('uncaughtException', (e) => {
   console.error(e);
@@ -23,14 +24,15 @@ module.exports = function Server({ cwd = process.cwd() } = {}) {
 
   app.use(compose([].concat(
     [
-      middleware.healthCheck(),
-      middleware.response(),
-      middleware.errorHandler(),
-      middleware.headers(),
-      middleware.fetch()
+      middlewares.healthCheck(),
+      middlewares.response(),
+      middlewares.errorHandler(),
+      middlewares.headers(),
+      middlewares.fetch()
     ],
-    middleware.router({ cwd }),
-    middleware.controller({ cwd })
+    loaders.service({ cwd }),
+    loaders.controller({ cwd }),
+    loaders.router({ cwd })
   )));
 
   app.on('error', errorHandler);
