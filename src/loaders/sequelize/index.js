@@ -13,7 +13,7 @@ module.exports = (config) => {
 
     await next();
   };
-  console.log(config);
+
   if (!config.sequelize) {
     return { middleware };
   }

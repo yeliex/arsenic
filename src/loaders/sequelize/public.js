@@ -33,10 +33,10 @@ const publicOption = {
   option: {
     timestamps: true,
     paranoid: true,
-    underscored: false,
-    createdAt: 'createdTime',
-    updatedAt: 'updateTime',
-    deletedAt: 'deletedTime'
+    underscored: true,
+    createdAt: 'utc_create',
+    updatedAt: 'utc_modified',
+    deletedAt: 'utc_deleted'
   }
 };
 
@@ -47,9 +47,9 @@ exports.model = (model = {}) => {
   Object.keys(model).forEach((key) => {
     if (model[key] === false) {
       delete schemes[key];
+    } else {
+      schemes[key] = model[key];
     }
-    schemes[key] = model[key];
-    return schemes;
   });
   return schemes;
 };
