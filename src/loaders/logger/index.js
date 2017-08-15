@@ -8,7 +8,7 @@ const loggers = {};
 
 const regist = (config) => {
   const loggerConfig = {
-    appenders: [].concat(globalConfig.appenders, config.logger.appenders),
+    appenders: [].concat(globalConfig.appenders, config.logger.appenders || []),
     replaceConsole: config.logger.replaceConsole || globalConfig.replaceConsole
   };
 
