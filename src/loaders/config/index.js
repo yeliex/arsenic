@@ -2,6 +2,7 @@ const { resolve } = require('path');
 const minimist = require('minimist');
 const { existsSync, dirExistsSync } = require('../../libs/utils/fs/index');
 const requireContext = require('../../libs/utils/require_context/index');
+const extend = require('extend2');
 
 const args = Object.assign({}, minimist(process.argv), minimist(JSON.parse(process.env.npm_config_argv || '{}').original || ''));
 
@@ -35,6 +36,8 @@ module.exports = ({ cwd }) => {
     cwd: path
   });
 
+  const baseConfig = contexts.configBase || {};
+
   const configs = Object.keys(contexts).reduce((total, key) => {
     const name = key.replace(/^config/, '').toLowerCase();
 
@@ -55,7 +58,7 @@ module.exports = ({ cwd }) => {
     return total;
   }, {});
 
-  const config = configs[env] || configs.default;
+  const config = extend(true, {}, baseConfig, configs[env] || configs.default);
 
   if (typeof config !== 'object') {
     throw new Error('config must be object');

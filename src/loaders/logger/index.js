@@ -41,6 +41,7 @@ const middleware = () => async (ctx, next) => {
   await next();
 };
 
+// todo: 需要与java端保持一致
 const DEFAULT_FORMAT = ':remote-addr - -' +
   ' ":method :url HTTP/:http-version"' +
   ' :status :response-time :content-length ":referrer"' +
@@ -52,7 +53,6 @@ const accessMiddleware = () => log4js.koaLogger(loggers.accessApi, {
 });
 
 Object.defineProperties(loggers, {
-  // todo: 需要与java端保持一致
   DEFAULT_FORMAT: {
     value: DEFAULT_FORMAT
   },

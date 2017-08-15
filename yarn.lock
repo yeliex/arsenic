@@ -421,6 +421,10 @@ extend-shallow@^2.0.1:
   dependencies:
     is-extendable "^0.1.0"
 
+extend2@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/extend2/-/extend2-1.0.0.tgz#0425a989b4dac2a486a32257f5140103756a7a3c"
+
 external-editor@^2.0.4:
   version "2.0.4"
   resolved "http://registry.npm.taobao.org/external-editor/download/external-editor-2.0.4.tgz#1ed9199da9cbfe2ef2f7a31b2fde8b0d12368972"
