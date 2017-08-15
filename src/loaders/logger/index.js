@@ -7,6 +7,8 @@ const _ = require('lodash');
 const loggers = {};
 
 const regist = (config) => {
+  config.logger = config.logger || {};
+
   const loggerConfig = {
     appenders: [].concat(globalConfig.appenders, config.logger.appenders || []),
     replaceConsole: config.logger.replaceConsole || globalConfig.replaceConsole
