@@ -1,5 +1,6 @@
 const fetch = require('autofetch');
-const { fetchLog } = require('../../index').Logger;
+
+let fetchLog = (require('../../index').Logger || {}).fetch;
 
 fetch.baseHost((path) => {
   return path.replace(/^\/\/([A-Z]{1,})/, (a, b) => {
@@ -24,11 +25,14 @@ fetch.callback((response) => {
     if (res.code && String(res.code).match(/^[A-Z]/)) {
       return Promise.reject(res.msg);
     }
+
+    fetchLog.info(`[response][${response.status}] ${response.url} ${JSON.stringify(res)}`);
     return res;
   }).catch((e) => {
     if (e.code === 'S0-000-00-0002') {
       return Promise.reject(`系统错误: ${e.code}`);
     }
+    fetchLog.error(`[response][${response.status}] ${response.url} ${typeof e === 'object' ? JSON.stringify(e) : e}`);
     return Promise.reject(e);
   });
 });
@@ -38,6 +42,9 @@ fetch.headers({
 });
 
 module.exports = (url, options = {}) => {
-  console.log(fetchLog.info(url));
+  if (!fetchLog) {
+    fetchLog = require('../../index').Logger.fetch;
+  }
+  fetchLog.info(`[${options.method || 'GET'}] ${url} ${options.mock ? 'mock' : ''}`);
   return fetch(url, options);
 };
