@@ -1,0 +1,69 @@
+const Sequelize = require('sequelize');
+const _ = {
+  camelCase: require('lodash/camelCase')
+};
+
+const fundation = require('./public');
+
+const dbs = {};
+
+module.exports = (config) => {
+  if (!config.sequelize) {
+    return null;
+  }
+
+  const { MYSQL_DB_NAME, MYSQL_DB_HOST = 'localhost', MYSQL_DB_PORT = 3306, MYSQL_DB_USER, MYSQL_DB_PASSWD } = config;
+
+  Object.keys({ MYSQL_DB_NAME, MYSQL_DB_USER, MYSQL_DB_PASSWD }).forEach((k) => {
+    if (!config[k]) {
+      throw new Error(`${k} cannot be undefined`);
+    }
+  });
+
+  const sequelize = new Sequelize(MYSQL_DB_NAME, MYSQL_DB_USER, MYSQL_DB_PASSWD, {
+    host: MYSQL_DB_HOST,
+    port: MYSQL_DB_PORT,
+    dialect: 'mysql',
+    typeValidation: true,
+    benchmark: true,
+    define: {
+      underscored: true
+    }
+  });
+
+  sequelize.authenticate().then(() => {
+    console.info(`connect mysql db: ${config.db} success`);
+  }).catch((e) => {
+    console.error(`connect mysql db: ${config.db} failed, ${e}`);
+  });
+
+  const define = sequelize.define;
+  sequelize.define = (arga, argb, argc) => {
+    return define(arga, fundation.model(argb), fundation.option(argc));
+  };
+
+  const models = config.sequelize(sequelize);
+
+  Object.keys(models).forEach((key) => {
+    console.log(`connect mysql model ${key} success`);
+    const name = `${_.camelCase(key)}DB`;
+    if (dbs[name]) {
+      throw new Error(`duplicate model name ${key}`);
+    }
+    dbs[name] = models[key];
+  });
+
+  sequelize.sync({ force: false }).then(() => {
+    console.info(`sync mysql db: ${MYSQL_DB_NAME} success`);
+  }).catch((e) => {
+    console.error(`sync mysql db: ${MYSQL_DB_NAME} failed, ${e}`);
+  });
+
+  return dbs;
+};
+
+exports.middleware = async (ctx, next) => {
+  ctx.db = dbs;
+
+  await next();
+};

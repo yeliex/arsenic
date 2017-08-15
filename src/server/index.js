@@ -26,6 +26,8 @@ module.exports = function Server({ cwd = process.cwd() } = {}) {
 
   app.config = config;
 
+  app.sequelize = loaders.sequelize(app.config);
+
   const logger = loaders.logger;
 
   logger.regist(app.config);
@@ -40,6 +42,7 @@ module.exports = function Server({ cwd = process.cwd() } = {}) {
       logger.accessMiddleware(),
       middlewares.response(app.config),
       middlewares.errorHandler(app.config),
+      loaders.sequelize.middleware(),
       middlewares.headers(app.config),
       middlewares.fetch(app.config)
     ],
