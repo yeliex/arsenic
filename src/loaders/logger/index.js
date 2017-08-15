@@ -17,7 +17,7 @@ const regist = (config) => {
   const logPath = config.logger.path ? resolve(config.logger.path, 'logs') : resolve(config.cwd, 'logs', config.name || '');
 
   try {
-    mkdirSync(loggerConfig);
+    mkdirSync(logPath);
   } catch (e) {
     if (!e.message.match(/exists/)) {
       throw new Error(e);
@@ -25,7 +25,9 @@ const regist = (config) => {
   }
 
   loggerConfig.appenders = loggerConfig.appenders.map((appender) => {
-    appender.filename = resolve(logPath, `${appender.category}.log`);
+    if(appender.category) {
+      appender.filename = resolve(logPath, `${appender.category}.log`);
+    }
     return appender;
   });
 

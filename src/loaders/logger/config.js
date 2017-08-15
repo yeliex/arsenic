@@ -4,27 +4,27 @@ module.exports = {
       type: 'console'
     },
     {
-      type: 'dataFile',
+      type: 'dateFile',
       pattern: '-yyyy-MM-dd',
       category: 'access-api'
     },
     {
-      type: 'dataFile',
+      type: 'dateFile',
       pattern: '-yyyy-MM-dd',
       category: 'access-static'
     },
     {
-      type: 'dataFile',
+      type: 'dateFile',
       pattern: '-yyyy-MM-dd',
       category: 'app'
     },
     {
-      type: 'dataFile',
+      type: 'dateFile',
       pattern: '-yyyy-MM-dd',
       category: 'error'
     },
     {
-      type: 'dataFile',
+      type: 'dateFile',
       pattern: '-yyyy-MM-dd',
       category: 'fetch'
     }

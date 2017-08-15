@@ -42,7 +42,7 @@ module.exports = function Server({ cwd = process.cwd() } = {}) {
       logger.accessMiddleware(),
       middlewares.response(app.config),
       middlewares.errorHandler(app.config),
-      loaders.sequelize.middleware(),
+      app.sequelize.middleware(),
       middlewares.headers(app.config),
       middlewares.fetch(app.config)
     ],
