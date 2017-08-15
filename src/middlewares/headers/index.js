@@ -29,7 +29,16 @@ module.exports = () => async (ctx, next) => {
   headers['X-Forwarded-For'] = ctx.get('X-Forwarded-For');
   headers['X-DEVICE-ID'] = ctx.get('X-DEVICE-ID');
 
+  // user
+  headers['X-User-UserId'] = ctx.get('X-User-UserId');
+  headers['X-User-CompanyId'] = ctx.get('X-User-CompanyId');
+
   ctx._HEADERS = new Headers(headers);
+
+  ctx._USER = Object.assign({}, ctx._USER || {}, {
+    userId: ctx.get('X-User-UserId'),
+    companyId: ctx.get('X-User-CompanyId')
+  });
 
   await next(ctx);
 };
