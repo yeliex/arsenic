@@ -1,4 +1,5 @@
 const fetch = require('autofetch');
+const { fetchLog } = require('../../index').Logger;
 
 fetch.baseHost((path) => {
   return path.replace(/^\/\/([A-Z]{1,})/, (a, b) => {
@@ -37,5 +38,6 @@ fetch.headers({
 });
 
 module.exports = (url, options = {}) => {
+  console.log(fetchLog.info(url));
   return fetch(url, options);
 };
