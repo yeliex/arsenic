@@ -30,7 +30,7 @@ module.exports = ({ cwd }) => {
   }
 
   return async (ctx, next) => {
-    ctx.Controller = keys.reduce((total, key) => {
+    ctx.controller = keys.reduce((total, key) => {
       total[key] = new controllers[key](ctx);
       return total;
     }, {});

@@ -38,9 +38,9 @@ module.exports = (config) => {
   });
 
   sequelize.authenticate().then(() => {
-    console.info(`connect mysql db: ${config.db} success`);
+    console.info(`connect mysql db: ${MYSQL_DB_NAME} success`);
   }).catch((e) => {
-    console.error(`connect mysql db: ${config.db} failed, ${e}`);
+    console.error(`connect mysql db: ${MYSQL_DB_NAME} failed, ${e}`);
   });
 
   const define = sequelize.define;

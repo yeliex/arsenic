@@ -30,7 +30,7 @@ module.exports = ({ cwd }) => {
   }
 
   return async (ctx, next) => {
-    ctx.Service = keys.reduce((total, key) => {
+    ctx.service = keys.reduce((total, key) => {
       const service = services[key];
       if (typeof service === 'function') {
         total[key] = new service(ctx);

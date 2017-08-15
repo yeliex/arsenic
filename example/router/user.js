@@ -4,9 +4,9 @@ const router = new Router({
   prefix: '/api'
 });
 
-router.get('/', ctx => ctx.Controller.user.a());
-router.get('/b', ctx => ctx.Controller.user.b());
+router.get('/', ctx => ctx.controller.user.a());
+router.get('/b', ctx => ctx.controller.user.b());
 
-router.mount('/users', ctx => ctx.Controller.user);
+router.mount('/users', ctx => ctx.controller.user);
 
 module.exports = router;
