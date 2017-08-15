@@ -13,6 +13,7 @@ module.exports = (config) => {
 
     await next();
   };
+  console.log(config);
   if (!config.sequelize) {
     return { middleware };
   }
@@ -44,7 +45,7 @@ module.exports = (config) => {
 
   const define = sequelize.define;
   sequelize.define = (arga, argb, argc) => {
-    return define(arga, fundation.model(argb), fundation.option(argc));
+    return define.call(sequelize, arga, fundation.model(argb), fundation.option(argc));
   };
 
   const models = config.sequelize(sequelize);
