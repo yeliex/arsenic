@@ -21,7 +21,7 @@
   "author": "yeliex",
   "license": "UNLICENSED",
   "dependencies": {
-    "autofetch": "^4.0.0",
+    "autofetch": "^4.1.0",
     "extend2": "^1.0.0",
     "glob": "^7.1.2",
     "inflection": "^1.12.0",
@@ -37,6 +37,7 @@
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
     "mysql": "^2.14.1",
+    "qs": "^6.5.0",
     "raven": "^2.1.1",
     "sequelize": "3",
     "ua-parser": "^0.3.5",

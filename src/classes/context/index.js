@@ -38,6 +38,18 @@ class Context {
   get headers() {
     return this.ctx._HEADERS;
   }
+
+  get query() {
+    return this.ctx._GET;
+  }
+
+  get body() {
+    return this.ctx._POST;
+  }
+
+  get params() {
+    return this.ctx.params;
+  }
 }
 
 module.exports = Context;
