@@ -5,6 +5,6 @@ module.exports = () => async (ctx, next) => {
     await next();
   } catch (error) {
     console.log(error);
-    errorHandler(ctx, error);
+    errorHandler(error, ctx);
   }
 };

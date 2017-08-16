@@ -25,6 +25,6 @@ module.exports = (error, ctx) => {
     res.code = 500;
     res.message = error;
   }
-  ctx.throw(error.code, error.message);
+  ctx.throw(res.code, res.message);
 };
 
