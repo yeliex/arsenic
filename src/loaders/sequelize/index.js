@@ -33,7 +33,8 @@ module.exports = (config) => {
     typeValidation: true,
     benchmark: true,
     define: {
-      underscored: true
+      underscored: true,
+      underscoredAll: true
     }
   });
 

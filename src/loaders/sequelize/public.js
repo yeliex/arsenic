@@ -37,6 +37,7 @@ const publicOption = {
     timestamps: true,
     paranoid: true,
     underscored: true,
+    underscoredAll: true,
     createdAt: 'utc_create',
     updatedAt: 'utc_modified',
     deletedAt: 'utc_deleted'
