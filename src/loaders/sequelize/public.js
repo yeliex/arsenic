@@ -1,4 +1,7 @@
 const Sequelize = require('sequelize');
+const _ = {
+  snakeCase: require('lodash/snakeCase')
+};
 
 exports.jsonSet = (key = 'extend') => {
   return function jsonSet(val) {
@@ -45,10 +48,17 @@ exports.option = (option = {}) => Object.assign({}, publicOption.option, option)
 exports.model = (model = {}) => {
   const schemes = Object.assign({}, publicOption.scheme);
   Object.keys(model).forEach((key) => {
-    if (model[key] === false) {
+    let def = model[key];
+    if (def === false) {
       delete schemes[key];
     } else {
-      schemes[key] = model[key];
+      if (typeof def !== 'object') {
+        def = {
+          type: def
+        };
+      }
+      def.field = def.field || _.snakeCase(key);
+      schemes[key] = def;
     }
   });
   return schemes;
