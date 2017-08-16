@@ -7,7 +7,9 @@ const { resolve } = require('path');
 const { existsSync, dirExistsSync } = require('../../libs/utils/fs/index');
 const requireContext = require('../../libs/utils/require_context/index');
 
-module.exports = ({ cwd }) => {
+const total = {};
+
+const regist = ({ cwd }) => {
   const path = resolve(cwd, './middleware');
 
   if (!dirExistsSync(path)) {
@@ -24,12 +26,15 @@ module.exports = ({ cwd }) => {
 
   const keys = Object.keys(middlewares);
 
-  return async (ctx, next) => {
-    ctx.middleware = keys.reduce((total, key) => {
-      total[key] = middlewares[key](ctx);
-      return total;
-    }, {});
-
-    await next();
-  };
+  keys.forEach((key) => {
+    total[key] = middlewares[key];
+  });
 };
+
+Object.defineProperties(total, {
+  regist: {
+    value: regist
+  }
+});
+
+module.exports = total;

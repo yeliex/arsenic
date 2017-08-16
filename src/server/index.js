@@ -34,6 +34,8 @@ module.exports = function Server({ cwd = process.cwd() } = {}) {
 
   app.logger = logger;
 
+  loaders.middleware.regist(app.config);
+
   app.use(compose([].concat(
     config.middleware(),
     [
@@ -49,7 +51,6 @@ module.exports = function Server({ cwd = process.cwd() } = {}) {
     ],
     loaders.service(app.config),
     loaders.controller(app.config),
-    loaders.middleware(app.config),
     loaders.router(app.config)
   )));
 
