@@ -67,9 +67,9 @@ module.exports = function Server({ cwd = process.cwd() } = {}) {
     const server = http.createServer(app.callback());
     server.listen(port, () => {
       if (server.listening) {
-        console.log(`server start listening at ${port}`);
+        logger.app.info(`server start listening at ${port}`);
       } else {
-        console.error(`server start listening failed`);
+        logger.app.error(`server start listening failed`);
       }
       if (typeof callback === 'function') {
         callback(server.listening);
