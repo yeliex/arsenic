@@ -3,7 +3,7 @@
 const { STATUS_CODES } = require('http');
 
 module.exports = (options = {}) => {
-  const { callback, cors = false } = typeof options === 'function' ? { callback: options } : options;
+  const { cors = false } = options;
 
   return async (ctx, next) => {
     //noinspection JSCommentMatchesSignature
@@ -133,9 +133,7 @@ module.exports = (options = {}) => {
 
       ctx.body = response.data;
 
-      if (typeof callback === 'function') {
-        callback(ctx);
-      }
+      ctx.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
     };
 
     await next();
