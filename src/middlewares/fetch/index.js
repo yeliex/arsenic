@@ -20,8 +20,8 @@ module.exports = () => async (ctx, next) => {
 
   ctx.fetch = (url, options = {}) => {
     options.headers = {
-      ...(options.headers || {}),
       ...headers,
+      ...headersToObject(options.headers || {}),
       'X-System-RpcId': `${rpcId}.${index++}`
     };
     return fetch(url, options);

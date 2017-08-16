@@ -31,6 +31,7 @@ module.exports = () => async (ctx, next) => {
   // user
   headers['X-User-UserId'] = ctx.get('X-User-UserId');
   headers['X-User-CompanyId'] = ctx.get('X-User-CompanyId');
+  headers['X-User-Password'] = ctx.get('X-User-Password') || ctx.config.X_USER_PASSWORD;
 
   ctx._HEADERS = new Headers(headers);
 
