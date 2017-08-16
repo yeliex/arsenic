@@ -49,6 +49,7 @@ module.exports = function Server({ cwd = process.cwd() } = {}) {
     ],
     loaders.service(app.config),
     loaders.controller(app.config),
+    loaders.middleware(app.config),
     loaders.router(app.config)
   )));
 

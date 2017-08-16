@@ -8,35 +8,25 @@ const { existsSync, dirExistsSync } = require('../../libs/utils/fs/index');
 const requireContext = require('../../libs/utils/require_context/index');
 
 module.exports = ({ cwd }) => {
-  const path = resolve(cwd, './service');
+  const path = resolve(cwd, './middleware');
 
   if (!dirExistsSync(path)) {
-    console.warn(`Services not exist: ${path}`);
     return async (ctx, next) => {
-      ctx.service = {};
+      ctx.middleware = {};
       await next();
     };
   }
 
-  const services = requireContext('./*', {
+  const middlewares = requireContext('./*', {
     cwd: path,
     exclude: /\.js$/
   });
 
-  const keys = Object.keys(services);
-
-  if (keys.length < 1) {
-    console.warn(`Services not exist: ${path}`);
-  }
+  const keys = Object.keys(middlewares);
 
   return async (ctx, next) => {
-    ctx.service = keys.reduce((total, key) => {
-      const service = services[key];
-      if (typeof service === 'function') {
-        total[key] = new service(ctx);
-      } else {
-        total[key] = service;
-      }
+    ctx.middleware = keys.reduce((total, key) => {
+      total[key] = middlewares[key](ctx);
       return total;
     }, {});
 
