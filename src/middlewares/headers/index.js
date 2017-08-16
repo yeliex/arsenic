@@ -1,6 +1,5 @@
 const { parse } = require('ua-parser');
 const { traceId } = require('../../libs/utils/trace/index');
-const Headers = require('node-fetch/lib/headers');
 
 const spreadHeaders = [
   'X-System-TraceId',
