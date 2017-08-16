@@ -3,8 +3,9 @@ const fetch = require('autofetch');
 let fetchLog = (require('../../index').Logger || {}).fetch;
 
 fetch.baseHost((path) => {
+  const host = process.env.NODE_ENV === 'production' ? '117sport.net' : 'daily.117sport.org';
   return path.replace(/^\/\/([A-Z]{1,})/, (a, b) => {
-    return `http://service-${b.toLowerCase()}.117sport.net`;
+    return `http://service-${b.toLowerCase()}.${host}`;
   });
 });
 
