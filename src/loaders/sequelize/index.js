@@ -52,8 +52,8 @@ module.exports = (config) => {
   const models = config.sequelize(sequelize);
 
   Object.keys(models).forEach((key) => {
-    console.log(`connect mysql model ${key} success`);
-    const name = `${_.camelCase(key)}DB`;
+    const name = `${_.camelCase(key)}`;
+    console.log(`connect mysql model ${key} as ${name} success`);
     if (dbs[name]) {
       throw new Error(`duplicate model name ${key}`);
     }
