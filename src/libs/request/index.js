@@ -19,7 +19,7 @@ fetch.callback((response) => {
   }).then((data) => {
     return response.ok ? data : Promise.reject(response.status === 500 ? data : {
       code: response.status,
-      message: data || response.statusText
+      message: (data || {}).message || data || response.statusText
     });
   }).then((res) => {
     // ...log
