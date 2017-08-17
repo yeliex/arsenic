@@ -2,7 +2,7 @@ const { basename, extname } = require('path');
 const glob = require('glob');
 
 const _ = {
-  camelCase: require('lodash/camelcase')
+  camelCase: require('lodash/camelCase')
 };
 
 module.exports = (pattern, options) => {
