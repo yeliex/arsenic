@@ -1,9 +1,8 @@
 {
-  "name": "arsenic",
+  "name": "@bee/arsenic",
   "version": "0.0.1",
   "description": "beesport node base server",
   "main": "src/index.js",
-  "private": true,
   "scripts": {
     "lint": "eslint ./ --fix",
     "mocha": "mocha $(find test -name '*.js')",
