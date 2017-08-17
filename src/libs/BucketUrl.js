@@ -4,6 +4,9 @@ const { BUCKETS } = require('../enums');
 const BUCKET_PROTOCOL = 'bucket:';
 
 exports.parseBucketUrl = (url, { w } = {}) => {
+  if (!url) {
+    return;
+  }
   const parsedUrl = parse(url, true);
   if (parsedUrl.protocol.toLowerCase() !== BUCKET_PROTOCOL) {
     return url;
