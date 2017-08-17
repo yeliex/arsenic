@@ -5,6 +5,8 @@
   "main": "src/index.js",
   "private": true,
   "scripts": {
+    "prepublishOnly": "echo use npm run pub to publish; exit -1",
+    "pub": "npm publish --registry=https://beesport:beesport@npm.117sport.com",
     "lint": "eslint ./ --fix",
     "mocha": "mocha $(find test -name '*.js')",
     "test": "npm run lint && npm run mocha"
