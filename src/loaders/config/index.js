@@ -58,6 +58,8 @@ module.exports = ({ cwd }) => {
     return total;
   }, {});
 
+  configs.default = configs.default || {};
+
   const config = extend(true, {}, baseConfig, configs[env] || configs.default);
 
   if (typeof config !== 'object') {

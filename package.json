@@ -4,6 +4,7 @@
   "description": "beesport node base server",
   "main": "src/index.js",
   "scripts": {
+    "preinstall": "npm config set @bee:registry https://yeliex:htsxking@npm.117sport.com",
     "lint": "eslint ./ --fix",
     "mocha": "mocha $(find test -name '*.js')",
     "test": "npm run lint && npm run mocha"
