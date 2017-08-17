@@ -1,6 +1,6 @@
 {
-  "name": "foundation",
-  "version": "1.0.0",
+  "name": "@bee/foundation",
+  "version": "0.0.1",
   "description": "beesport node foundations",
   "main": "src/index.js",
   "private": true,
