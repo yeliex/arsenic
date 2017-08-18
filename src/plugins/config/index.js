@@ -25,7 +25,9 @@ const env = (() => {
   return 'development';
 })();
 
-module.exports = ({ cwd }) => {
+module.exports = (app) => {
+  const cwd = app.option.cwd || process.cwd();
+
   const path = resolve(cwd, './config');
 
   if (!dirExistsSync(path)) {
@@ -80,6 +82,9 @@ module.exports = ({ cwd }) => {
   });
 
   process.env.NODE_ENV = env;
+
+  app.config = config;
+  app.cwd = config;
 
   return config;
 };

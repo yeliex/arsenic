@@ -2,9 +2,7 @@
 
 const { STATUS_CODES } = require('http');
 
-module.exports = (options = {}) => {
-  const { cors = false } = options;
-
+module.exports = (app) => {
   return async (ctx, next) => {
     //noinspection JSCommentMatchesSignature
     ctx.throw = (...args) => {
@@ -121,7 +119,7 @@ module.exports = (options = {}) => {
         ctx.set('Content-Type', ctx.get('Content-Type') || 'text/html;charset=utf8');
       }
 
-      if (cors || ctx.get('referer') || ctx.get('user-agent').match(/([Mm])ozilla/)) {
+      if (ctx.get('referer') || ctx.get('user-agent').match(/([Mm])ozilla/)) {
         ctx.set({
           'Access-Control-Allow-Origin': ctx.get('origin') || '*',
           'Access-Control-Allow-Credentials': 'true',
@@ -133,7 +131,7 @@ module.exports = (options = {}) => {
 
       ctx.body = response.data;
 
-      ctx.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
+      app.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
     };
 
     await next();

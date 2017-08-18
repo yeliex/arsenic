@@ -7,7 +7,7 @@ const spreadHeaders = [
   'X-System-RequestID'
 ];
 
-module.exports = () => async (ctx, next) => {
+module.exports = (app) => async (ctx, next) => {
   const headers = {};
 
   // trace
@@ -31,14 +31,9 @@ module.exports = () => async (ctx, next) => {
   // user
   headers['X-User-UserId'] = ctx.get('X-User-UserId');
   headers['X-User-CompanyId'] = ctx.get('X-User-CompanyId');
-  headers['X-User-Password'] = ctx.get('X-User-Password') || ctx.config.X_USER_PASSWORD;
+  headers['X-User-Password'] = ctx.get('X-User-Password') || app.config.X_USER_PASSWORD;
 
   ctx._HEADERS = new Headers(headers);
-
-  ctx._USER = Object.assign({}, ctx._USER || {}, {
-    userId: ctx.get('X-User-UserId'),
-    companyId: ctx.get('X-User-CompanyId')
-  });
 
   await next(ctx);
 };

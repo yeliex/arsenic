@@ -7,15 +7,12 @@ const fundation = require('./public');
 
 const dbs = {};
 
-module.exports = (config) => {
-  const middleware = () => async (ctx, next) => {
-    ctx.db = dbs;
-
-    await next();
-  };
+module.exports = (app) => {
+  const config = app.config;
 
   if (!config.sequelize) {
-    return { middleware };
+    app.db = {};
+    return {};
   }
 
   const { MYSQL_DB_NAME, MYSQL_DB_HOST = 'localhost', MYSQL_DB_PORT = 3306, MYSQL_DB_USER, MYSQL_DB_PASSWD } = config;
@@ -66,11 +63,7 @@ module.exports = (config) => {
     console.error(`sync mysql db: ${MYSQL_DB_NAME} failed, ${e}`);
   });
 
-  Object.defineProperties(dbs, {
-    middleware: {
-      value: middleware
-    }
-  });
+  app.db = dbs;
 
   return dbs;
 };

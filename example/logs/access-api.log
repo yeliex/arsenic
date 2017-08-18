@@ -1,0 +1,79 @@
+[2017-08-21 11:07:32.447] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET / HTTP/1.1" 404 15 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:07:57.189] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET / HTTP/1.1" 404 16 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:08:25.353] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /user HTTP/1.1" 404 1 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:08:39.766] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /api/user HTTP/1.1" 404 1 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:08:52.729] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /api/user/users HTTP/1.1" 404 0 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:10:19.027] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /api/user/users HTTP/1.1" 404 14 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:14:05.818] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /api/user/users HTTP/1.1" 404 13 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:14:33.600] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /api/user/users HTTP/1.1" 404 14 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:15:23.793] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /api/user/users HTTP/1.1" 404 1 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:15:28.726] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /api/user/users HTTP/1.1" 404 17 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:15:29.963] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /api/user/users HTTP/1.1" 404 1 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:15:44.030] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET / HTTP/1.1" 404 2 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:15:45.889] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 1 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:18:18.548] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 14 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:18:34.084] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 16 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:50:45.326] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 16 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:52:19.983] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 17 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:53:36.496] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 14 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:53:46.186] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 16 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:53:55.334] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 16 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:54:13.100] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 20 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:54:31.755] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 19 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:54:37.316] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 15 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:54:46.821] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 16 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:55:08.849] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 16 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:55:47.733] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 21 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:56:31.216] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 21 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:56:57.655] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 18 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:57:23.126] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 3 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:57:29.254] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 185 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:57:58.497] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 24 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:58:28.715] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 27 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:58:40.385] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 18 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:59:16.004] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 25 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:59:19.488] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 1 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:59:24.465] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 19 - "" "curl/7.54.0" undefined */*
+[2017-08-21 11:59:51.367] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 21 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:00:01.547] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 20 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:00:43.187] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 20 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:00:59.495] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 18 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:01:28.299] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 18 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:12:09.781] [ERROR] access-api - [500][GET] /asd {"code":500,"data":"","message":{"code":500,"message":"this.app.toJSON is not a function"}}
+[2017-08-21 12:13:12.274] [ERROR] access-api - [500][GET] /asd {"code":500,"data":"","message":{"code":500,"message":"this.app.toJSON is not a function"}}
+[2017-08-21 12:13:33.621] [ERROR] access-api - [500][GET] /asd {"code":500,"data":"","message":{"code":500,"message":"this.app.toJSON is not a function"}}
+[2017-08-21 12:13:56.836] [ERROR] access-api - [500][GET] /asd {"code":500,"data":"","message":{"code":500,"message":"this.app.toJSON is not a function"}}
+[2017-08-21 12:14:17.056] [ERROR] access-api - [500][GET] /asd {"code":500,"data":"","message":{"code":500,"message":"this.app.toJSON is not a function"}}
+[2017-08-21 12:14:53.369] [ERROR] access-api - [500][GET] /asd {"code":500,"data":"","message":"this.app.toJSON is not a function"}
+[2017-08-21 12:15:29.346] [ERROR] access-api - ::1 - - "GET /asd HTTP/1.1" 404 19 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:15:48.647] [ERROR] access-api - ::1 - - "GET /asd HTTP/1.1" 404 23 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:15:58.008] [ERROR] access-api - ::1 - - "GET /asd HTTP/1.1" 404 26 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:16:35.603] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /asd HTTP/1.1" 404 18 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:17:01.305] [ERROR] access-api - ::1 - - "GET /asd HTTP/1.1" 404 21 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:23:14.412] [ERROR] access-api - ::1 - - "GET /user/a HTTP/1.1" 404 2 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:23:16.013] [ERROR] access-api - ::1 - - "GET /user/ HTTP/1.1" 404 2 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:23:31.029] [ERROR] access-api - [500][GET] /api/user/b {"code":500,"data":"","message":"ctx.controller.user.b is not a function"}
+[2017-08-21 12:23:55.445] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /api/user/b HTTP/1.1" 404 18 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:24:44.637] [ERROR] access-api - [500][GET] /api/user/b {"code":500,"data":"","message":"ctx.controller.user.b is not a function"}
+[2017-08-21 12:25:00.587] [ERROR] access-api - [500][GET] /api/user/b {"code":500,"data":"","message":"ctx.controller.user.b is not a function"}
+[2017-08-21 12:28:36.638] [ERROR] access-api - [500][GET] /api/user/b {"code":500,"data":"","message":"k is not defined"}
+[2017-08-21 12:28:51.729] [ERROR] access-api - [500][GET] /api/user/b {"code":500,"data":"","message":"Cannot read property 'b' of undefined"}
+[2017-08-21 12:29:06.730] [ERROR] access-api - [500][GET] /api/user/b {"code":500,"data":"","message":"Cannot read property 'b' of undefined"}
+[2017-08-21 12:29:56.306] [ERROR] access-api - [500][GET] /api/user/b {"code":500,"data":"","message":"Cannot read property 'b' of undefined"}
+[2017-08-21 12:30:24.330] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 21 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:30:32.729] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 24 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:30:38.583] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 25 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:31:08.809] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 23 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:31:53.619] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 23 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:32:04.314] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 21 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:33:10.251] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 20 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:34:05.436] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 30 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:35:17.202] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 32 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:36:11.934] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 19 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:36:25.997] [ERROR] access-api - ::ffff:127.0.0.1 - - "GET /api/user/b HTTP/1.1" 404 17 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:36:44.108] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 29 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:39:30.514] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 17 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:40:10.535] [ERROR] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 404 22 - "" "curl/7.54.0" undefined */*
+[2017-08-21 12:40:23.029] [ERROR] access-api - [500][GET] /api/user/b {"code":500,"data":"","message":"Cannot read property 'promise' of undefined"}
+[2017-08-21 12:40:44.387] [INFO] access-api - [200][GET] /api/user/b {"code":200,"data":123,"message":""}
+[2017-08-21 12:40:44.389] [INFO] access-api - ::1 - - "GET /api/user/b HTTP/1.1" 200 1033 36 "" "curl/7.54.0" undefined */*

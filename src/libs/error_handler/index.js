@@ -1,16 +1,13 @@
 // 对系统异常的处理,比如未捕获的异常
-module.exports = (error, ctx) => {
-  ctx.logger.error.error(error);
+module.exports = (app) => (error, ctx) => {
+  app.logger.error.error(error);
   const res = {
     code: 500,
     message: ''
   };
   if (error instanceof Error) {
     res.code = 500;
-    res.message = {
-      code: error.code || 500,
-      message: error.message
-    };
+    res.message = error.message;
   } else if (typeof error === 'object') {
     res.code = error.code || 500;
     res.message = error.message || error.error;
@@ -26,6 +23,8 @@ module.exports = (error, ctx) => {
     res.code = 500;
     res.message = error;
   }
-  ctx.throw(res.code, res.message);
+  if (ctx && typeof ctx.throw === 'function') {
+    ctx.throw(res.code, res.message);
+  }
 };
 

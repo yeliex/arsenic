@@ -3,8 +3,8 @@ class Context {
     this.ctx = ctx;
   }
 
-  get logger() {
-    return this.ctx.logger;
+  get app() {
+    return this.ctx.App;
   }
 
   get controller() {
@@ -15,8 +15,16 @@ class Context {
     return this.ctx.service;
   }
 
-  get db() {
-    return this.ctx.db;
+  get middleware() {
+    return this.ctx.App.middleware;
+  }
+
+  get plugin() {
+    return this.ctx.App.plugin;
+  }
+
+  get logger() {
+    return this.ctx.App.logger;
   }
 
   get throw() {
@@ -28,7 +36,11 @@ class Context {
   }
 
   get config() {
-    return this.ctx.config;
+    return this.ctx.App.config;
+  }
+
+  get db() {
+    return this.ctx.App.db;
   }
 
   get user() {

@@ -25,7 +25,7 @@ const regist = (config) => {
   }
 
   loggerConfig.appenders = loggerConfig.appenders.map((appender) => {
-    if(appender.category) {
+    if (appender.category) {
       appender.filename = resolve(logPath, `${appender.category}.log`);
     }
     return appender;
@@ -71,4 +71,10 @@ Object.defineProperties(loggers, {
   }
 });
 
-module.exports = loggers;
+module.exports = (app) => {
+  loggers.regist(app.config);
+
+  app.logger = loggers;
+
+  return loggers;
+};

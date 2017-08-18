@@ -8,7 +8,8 @@ const mount = require('koa-mount');
 const { existsSync, dirExistsSync } = require('../../libs/utils/fs/index');
 const requireContext = require('../../libs/utils/require_context/index');
 
-module.exports = ({ cwd }) => {
+module.exports = (App) => {
+  const cwd = App.option.cwd;
   const path = resolve(cwd, './router');
 
   if (!dirExistsSync(path)) {
@@ -28,12 +29,12 @@ module.exports = ({ cwd }) => {
     console.warn(`Routers not exist: ${path}`);
   }
 
-  return keys.map((key) => {
+  keys.forEach((key) => {
     const router = routers[key] || {};
     if (!router.middleware || typeof router.middleware !== 'function') {
       throw new Error(`router middleware must be a function: ${key}`);
     }
 
-    return mount(join(router.prefix || '/', key === 'index' ? '/' : key), router.middleware());
+    App.app.use(mount(join(router.prefix || '/', key === 'index' ? '/' : key), router.middleware()));
   });
 };
