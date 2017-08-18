@@ -1,6 +1,6 @@
 {
   "name": "@bee/arsenic",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "beesport node base server",
   "main": "src/index.js",
   "scripts": {

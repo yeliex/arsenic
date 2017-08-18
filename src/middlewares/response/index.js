@@ -121,7 +121,7 @@ module.exports = (options = {}) => {
         ctx.set('Content-Type', ctx.get('Content-Type') || 'text/html;charset=utf8');
       }
 
-      if (cors) {
+      if (cors || ctx.get('referer') || ctx.get('user-agent').match(/([Mm])ozilla/)) {
         ctx.set({
           'Access-Control-Allow-Origin': ctx.get('origin') || '*',
           'Access-Control-Allow-Credentials': 'true',
