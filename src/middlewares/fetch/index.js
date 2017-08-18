@@ -5,7 +5,7 @@ const headersToObject = (headers) => {
     return headers;
   }
   return Array.from(headers.keys()).reduce((total, key) => {
-    total[key] = headers.get(key);
+    total[key.toLowerCase()] = headers.get(key);
     return total;
   }, {});
 };
@@ -15,14 +15,14 @@ module.exports = () => async (ctx, next) => {
 
   const headers = headersToObject(ctx._HEADERS || {});
 
-  const traceId = ctx.get('X-System-TraceId');
-  const rpcId = ctx.get('X-System-RpcId');
+  const traceId = ctx._HEADERS.get('X-System-TraceId');
+  const rpcId = ctx._HEADERS.get('X-System-RpcId');
 
   ctx.fetch = (url, options = {}) => {
     options.headers = {
       ...headers,
       ...headersToObject(options.headers || {}),
-      'X-System-RpcId': `${rpcId}.${index++}`
+      'x-system-rpcid': `${rpcId}.${index++}`
     };
     return fetch(url, options);
   };

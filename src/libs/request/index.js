@@ -10,6 +10,7 @@ fetch.baseHost((path) => {
 });
 
 fetch.callback((response) => {
+  const requestid = response.headers.get('x-system-requestid');
   return response.text().then((text) => {
     try {
       return JSON.parse(text);
@@ -27,10 +28,10 @@ fetch.callback((response) => {
       return Promise.reject(res.msg);
     }
 
-    fetchLog.info(`[response][${response.status}] ${response.url} ${JSON.stringify(res)}`);
-    return res;
+    fetchLog.info(`[response][${response.status}] ${requestid} ${response.url} ${JSON.stringify(res)}`);
+    return res.data || res;
   }).catch((e) => {
-    fetchLog.error(`[response][${response.status}] ${response.url} ${typeof e === 'object' ? JSON.stringify(e) : e}`);
+    fetchLog.error(`[response][${response.status}] ${requestid} ${response.url} ${typeof e === 'object' ? JSON.stringify(e) : e}`);
     if (e.code === 'S0-000-00-0002') {
       return Promise.reject(`系统错误: ${e.code}`);
     }
