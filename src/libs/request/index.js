@@ -30,10 +30,10 @@ fetch.callback((response) => {
     fetchLog.info(`[response][${response.status}] ${response.url} ${JSON.stringify(res)}`);
     return res;
   }).catch((e) => {
+    fetchLog.error(`[response][${response.status}] ${response.url} ${typeof e === 'object' ? JSON.stringify(e) : e}`);
     if (e.code === 'S0-000-00-0002') {
       return Promise.reject(`系统错误: ${e.code}`);
     }
-    fetchLog.error(`[response][${response.status}] ${response.url} ${typeof e === 'object' ? JSON.stringify(e) : e}`);
     return Promise.reject(e);
   });
 });
