@@ -16,6 +16,11 @@ module.exports = {
     {
       type: 'dateFile',
       pattern: '-yyyy-MM-dd',
+      category: 'api-data'
+    },
+    {
+      type: 'dateFile',
+      pattern: '-yyyy-MM-dd',
       category: 'app'
     },
     {

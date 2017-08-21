@@ -119,7 +119,7 @@ module.exports = (app) => {
         ctx.set('Content-Type', ctx.get('Content-Type') || 'text/html;charset=utf8');
       }
 
-      if (ctx.get('referer') || ctx.get('user-agent').match(/([Mm])ozilla/)) {
+      if (ctx.get('referer') || (ctx.get('user-agent') || '').match(/([Mm])ozilla/)) {
         ctx.set({
           'Access-Control-Allow-Origin': ctx.get('origin') || '*',
           'Access-Control-Allow-Credentials': 'true',
