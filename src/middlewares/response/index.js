@@ -4,6 +4,8 @@ const { STATUS_CODES } = require('http');
 
 module.exports = (app) => {
   return async (ctx, next) => {
+    const userAgent = process.env.NODE_ENV === 'test' ? '' : ctx.get('user-agent');
+
     //noinspection JSCommentMatchesSignature
     ctx.throw = (...args) => {
       const response = {
@@ -119,7 +121,7 @@ module.exports = (app) => {
         ctx.set('Content-Type', ctx.get('Content-Type') || 'text/html;charset=utf8');
       }
 
-      if (ctx.get('referer') || (ctx.get('user-agent') || '').match(/([Mm])ozilla/)) {
+      if (ctx.get('referer') || userAgent.match(/([Mm])ozilla/)) {
         ctx.set({
           'Access-Control-Allow-Origin': ctx.get('origin') || '*',
           'Access-Control-Allow-Credentials': 'true',
@@ -131,7 +133,9 @@ module.exports = (app) => {
 
       ctx.body = response.data;
 
-      app.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
+      if (process.env.NODE_ENV !== 'test') {
+        app.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
+      }
     };
 
     await next();

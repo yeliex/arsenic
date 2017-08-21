@@ -7,7 +7,7 @@
     "preinstall": "npm config set @bee:registry https://yeliex:htsxking@npm.117sport.com",
     "lint": "eslint ./ --fix",
     "mocha": "mocha $(find test -name '*.js')",
-    "test": "npm run lint && npm run mocha"
+    "test": "npm run lint &&NODE_ENV=test npm run mocha"
   },
   "repository": {
     "type": "git",
