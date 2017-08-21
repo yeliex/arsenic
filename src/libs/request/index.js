@@ -1,6 +1,6 @@
 const fetch = require('autofetch');
 
-let fetchLog = (require('../../index').Logger || {}).fetch;
+let fetchLog = null;
 
 fetch.baseHost((path) => {
   const host = process.env.NODE_ENV === 'production' ? '117sport.net' : '117sport.org';
@@ -43,9 +43,9 @@ fetch.headers({
   'User-Agent': 'node-fetch/1.0 autofetch/3 node beesport/3 like(BeeSport/3.0-660.1 (iPhone6; iOS/9.3))'
 });
 
-module.exports = (url, options = {}) => {
-  if (!fetchLog) {
-    fetchLog = require('../../index').Logger.fetch;
+module.exports = (app) => (url, options = {}) => {
+  if(!fetchLog){
+    fetchLog = app.logger.fetch;
   }
   fetchLog.info(`[${options.method || 'GET'}] ${url} ${options.mock ? 'mock' : ''}`);
   return fetch(url, options);
