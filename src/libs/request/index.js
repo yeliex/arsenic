@@ -1,12 +1,18 @@
 const fetch = require('autofetch');
+const { stringify } = require('qs');
 
 let fetchLog = null;
 
-fetch.baseHost((path) => {
+fetch.baseHost((path, options) => {
   const host = process.env.NODE_ENV === 'production' ? '117sport.net' : '117sport.org';
-  return path.replace(/^\/\/([A-Z-_]{1,})/, (a, b) => {
+  const url = path.replace(/^\/\/([A-Z-_]{1,})/, (a, b) => {
     return `http://service-${b.toLowerCase()}.${host}`;
   });
+
+  if (options.query) {
+    return `${url}${url.match(/\?/) ? '&' : '?'}${stringify(options.query)}`;
+  }
+  return url;
 });
 
 fetch.callback((response) => {
@@ -44,7 +50,7 @@ fetch.headers({
 });
 
 module.exports = (app) => (url, options = {}) => {
-  if(!fetchLog){
+  if (!fetchLog) {
     fetchLog = app.logger.fetch;
   }
   fetchLog.info(`[${options.method || 'GET'}] ${url} ${options.mock ? 'mock' : ''}`);
