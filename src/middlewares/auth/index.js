@@ -7,8 +7,8 @@ module.exports = (app) => async (ctx, next) => {
   }
 
   ctx._USER = Object.assign({}, ctx._USER || {}, {
-    userId: ctx.get('X-User-UserId'),
-    companyId: ctx.get('X-User-CompanyId')
+    userId: Number(ctx.get('X-User-UserId')),
+    companyId: Number(ctx.get('X-User-CompanyId'))
   });
 
   await next();
