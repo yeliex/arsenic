@@ -30,7 +30,9 @@ module.exports = (App) => {
   }
 
   keys.forEach((key) => {
-    const router = routers[key] || {};
+    const required = routers[key] || {};
+    const router = typeof required === 'function' ? required(App) : required;
+
     if (!router.middleware || typeof router.middleware !== 'function') {
       throw new Error(`router middleware must be a function: ${key}`);
     }
