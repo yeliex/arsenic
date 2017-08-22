@@ -27,5 +27,7 @@ module.exports = (App) => {
 
   App.middleware = keys.reduce((total, key) => {
     total[key] = middlewares[key];
+
+    return total;
   }, {});
 };

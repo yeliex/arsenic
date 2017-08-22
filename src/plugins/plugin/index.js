@@ -27,5 +27,7 @@ module.exports = (App) => {
 
   App.plugin = keys.reduce((total, key) => {
     total[key] = plugins[key];
+
+    return total;
   }, {});
 };

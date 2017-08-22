@@ -54,6 +54,9 @@ class App {
       Object.defineProperties(ctx, {
         App: {
           value: this
+        },
+        middleware: {
+          value: this.middleware
         }
       });
       await next();
