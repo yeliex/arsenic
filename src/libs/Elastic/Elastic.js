@@ -9,7 +9,7 @@ const Model = require('./Model');
 
 class Elastic {
   @Private
-  $models;
+  $models = {};
 
   @Private
   $host;

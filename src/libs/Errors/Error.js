@@ -15,7 +15,9 @@ const SourceTypes = require('./SourceTypes');
 const PriorityTypes = require('./PriorityTypes');
 const assert = require('assert');
 
-exports.SystemError = class SystemError extends BaseError {
+exports.Errors = {};
+
+exports.Errors.SYSTEM_ERROR = class SystemError extends BaseError {
   constructor(props) {
     super(props);
     this.code = ErrorCodes.SYSTEM_ERROR_CODE;
@@ -27,7 +29,7 @@ exports.SystemError = class SystemError extends BaseError {
   }
 };
 
-exports.BizError = class BizError extends BaseError {
+exports.Errors.BIZ_ERROR = class BizError extends BaseError {
   constructor(props) {
     super(props);
     this.domainType = DomainTypes.B;
@@ -37,7 +39,7 @@ exports.BizError = class BizError extends BaseError {
   }
 };
 
-exports.IllegalParamError = class IllegalParamError extends BaseError {
+exports.Errors.ILLEGAL_PARAMS_ERROR = class IllegalParamError extends BaseError {
   constructor(props) {
     super(props);
     this.domainType = DomainTypes.B;
@@ -48,7 +50,7 @@ exports.IllegalParamError = class IllegalParamError extends BaseError {
   }
 };
 
-exports.MissAccessUserError = class MissAccessUserError extends BaseError {
+exports.Errors.MISS_ACCESS_USER_ERROR = class MissAccessUserError extends BaseError {
   constructor(props) {
     super(props);
     this.domainType = DomainTypes.B;
@@ -59,7 +61,7 @@ exports.MissAccessUserError = class MissAccessUserError extends BaseError {
   }
 };
 
-exports.PagedNoMoreData = class PagedNoMoreData extends BaseError {
+exports.Errors.PAGED_NO_MORE_DATA = class PagedNoMoreData extends BaseError {
   constructor(props) {
     super(props);
 
@@ -72,7 +74,7 @@ exports.PagedNoMoreData = class PagedNoMoreData extends BaseError {
   }
 };
 
-exports.PermissionError = class PermissionError extends BaseError {
+exports.Errors.PERMISSION_ERROR = class PermissionError extends BaseError {
   constructor(props) {
     super(props);
     this.domainType = DomainTypes.B;
@@ -84,7 +86,7 @@ exports.PermissionError = class PermissionError extends BaseError {
   }
 };
 
-exports.EntityNotExist = class EntityNotExist extends BaseError {
+exports.Errors.ENTITY_NOT_EXIST = class EntityNotExist extends BaseError {
   constructor(props) {
     super(props);
 
@@ -97,7 +99,7 @@ exports.EntityNotExist = class EntityNotExist extends BaseError {
   }
 };
 
-exports.UnknownError = class UnknownError extends BaseError {
+exports.Errors.UNKNOWN_ERROR = class UnknownError extends BaseError {
   constructor(props) {
     super(props);
 
@@ -113,12 +115,14 @@ exports.UnknownError = class UnknownError extends BaseError {
 exports.ErrorTemplate = function ErrorTemplate(seriesType) {
   assert(seriesType instanceof SeriesType, 'seriesType must be SeriesType');
 
-  return class CustomError extends BizError {
-    constructor(code, message) {
-      super();
-      this.code = new ErrorCode(code, message);
-      this.seriesType = seriesType;
-    }
+  return function CustomError(code, message) {
+    return class extends exports.Errors.BIZ_ERROR {
+      constructor(a = code, b = message) {
+        super();
+        this.code = new ErrorCode(a, b);
+        this.seriesType = seriesType;
+      }
+    };
   };
 };
 
