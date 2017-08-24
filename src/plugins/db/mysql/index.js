@@ -1,31 +1,34 @@
 const Sequelize = require('sequelize');
+const { resolve } = require('path');
 const _ = {
   camelCase: require('lodash/camelCase')
 };
+
+const { discoverDefine } = require('../index');
 
 const fundation = require('./public');
 
 const dbs = {};
 
-module.exports = (app) => {
-  const config = app.config;
+module.exports = (App, define) => {
+  const config = App.config.plugins.mysql;
 
-  if (!config.sequelize) {
-    app.db = {};
+  if (Object.keys(define).length < 1 || !config.enable) {
+    App.db = {};
     return {};
   }
 
-  const { MYSQL_DB_NAME, MYSQL_DB_HOST = 'localhost', MYSQL_DB_PORT = 3306, MYSQL_DB_USER, MYSQL_DB_PASSWD } = config;
+  const { db, host = 'localhost', port = 3306, user, passwd } = config;
 
-  Object.keys({ MYSQL_DB_NAME, MYSQL_DB_USER, MYSQL_DB_PASSWD }).forEach((k) => {
+  Object.keys({ name, user, passwd }).forEach((k) => {
     if (!config[k]) {
       throw new Error(`${k} cannot be undefined`);
     }
   });
 
-  const sequelize = new Sequelize(MYSQL_DB_NAME, MYSQL_DB_USER, MYSQL_DB_PASSWD, {
-    host: MYSQL_DB_HOST,
-    port: MYSQL_DB_PORT,
+  const sequelize = new Sequelize(name, user, passwd, {
+    host: host,
+    port: port,
     dialect: 'mysql',
     typeValidation: true,
     benchmark: true,
@@ -36,14 +39,15 @@ module.exports = (app) => {
   });
 
   sequelize.authenticate().then(() => {
-    console.info(`connect mysql db: ${MYSQL_DB_NAME} success`);
+    console.info(`connect mysql db: ${name} success`);
   }).catch((e) => {
-    console.error(`connect mysql db: ${MYSQL_DB_NAME} failed, ${e}`);
+    console.error(`connect mysql db: ${name} failed, ${e}`);
   });
 
-  const define = sequelize.define;
+  const sequelizeDefine = sequelize.define;
+
   sequelize.define = (arga, argb, argc) => {
-    return define.call(sequelize, arga, fundation.model(argb), fundation.option(argc));
+    return sequelizeDefine.call(sequelize, arga, fundation.model(argb), fundation.option(argc));
   };
 
   const models = config.sequelize(sequelize);
@@ -58,12 +62,12 @@ module.exports = (app) => {
   });
 
   sequelize.sync({ force: false }).then(() => {
-    console.info(`sync mysql db: ${MYSQL_DB_NAME} success`);
+    console.info(`sync mysql db: ${name} success`);
   }).catch((e) => {
-    console.error(`sync mysql db: ${MYSQL_DB_NAME} failed, ${e}`);
+    console.error(`sync mysql db: ${name} failed, ${e}`);
   });
 
-  app.db = dbs;
+  App.db = dbs;
 
   return dbs;
 };

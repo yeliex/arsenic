@@ -34,14 +34,16 @@ class App {
     AppPrivate.option = option;
     AppPrivate.app = new Koa();
 
+    plugins.config(AppPrivate);
+
+    plugins.error(AppPrivate);
+
     AppPrivate.app.on('error', errorHandler(this));
 
     AppPrivate.app.use(middlewares.errorHandler(this));
 
     // 载入必要插件
-    plugins.config(AppPrivate);
-
-    plugins.sequelize(AppPrivate);
+    plugins.db.all(AppPrivate);
 
     plugins.logger(AppPrivate);
 
@@ -142,6 +144,11 @@ class App {
   //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get db() {
     return AppPrivate.db;
+  }
+
+  //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
+  get search() {
+    return AppPrivate.search;
   }
 
   //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic

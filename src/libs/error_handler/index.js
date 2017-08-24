@@ -1,6 +1,9 @@
 // 对系统异常的处理,比如未捕获的异常
-module.exports = (app) => (error, ctx) => {
-  app.logger.error.error(error);
+module.exports = (App) => (error, ctx) => {
+  if (!error instanceof App.Error) {
+
+  }
+  App.logger.error.error(error);
   const res = {
     code: 500,
     message: ''

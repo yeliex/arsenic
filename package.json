@@ -4,7 +4,6 @@
   "description": "beesport node base server",
   "main": "src/index.js",
   "scripts": {
-    "preinstall": "npm config set @bee:registry https://yeliex:htsxking@npm.117sport.com",
     "lint": "eslint ./ --fix",
     "mocha": "mocha $(find test -name '*.js')",
     "test": "npm run lint &&NODE_ENV=test npm run mocha"
@@ -21,6 +20,7 @@
   "author": "yeliex",
   "license": "UNLICENSED",
   "dependencies": {
+    "@bee/foundation": "^0.0.15",
     "autofetch": "^4.1.0",
     "extend2": "^1.0.0",
     "glob": "^7.1.2",

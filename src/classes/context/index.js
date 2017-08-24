@@ -43,6 +43,10 @@ class Context {
     return this.ctx.App.db;
   }
 
+  get search(){
+    return this.ctx.App.search;
+  }
+
   get user() {
     return this.ctx._USER;
   }
