@@ -122,8 +122,6 @@ exports.ErrorTemplate = function ErrorTemplate(seriesType) {
   };
 };
 
-exports.Error = BaseError;
-
 exports.DomainType = require('./DomainType');
 exports.DomainTypes = DomainTypes;
 
