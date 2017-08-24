@@ -1,10 +1,20 @@
 {
   "name": "@bee/foundation",
-  "version": "0.0.2",
+  "version": "0.0.8",
   "description": "beesport node foundations",
-  "main": "src/index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src",
+    "package.json",
+    "yarn.lock",
+    "readme.md"
+  ],
   "scripts": {
     "lint": "eslint ./ --fix",
+    "prebuild": "rm -rf lib/",
+    "build": "babel src -d ./lib",
+    "prepublishOnly": "npm run build",
     "mocha": "mocha $(find test -name '*.js')",
     "test": "npm run lint && npm run mocha"
   },

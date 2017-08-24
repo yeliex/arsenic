@@ -127,12 +127,12 @@ class BaseError {
   }
 
   get message() {
-    return this.$message;
+    return this.$message ? this.$message.toString() : this.$code.comment;
 
   }
 
   set message(message) {
-    this.$message = message;
+    this.$message = String(message);
   }
 
   appendMsg(str) {
@@ -140,7 +140,7 @@ class BaseError {
   }
 
   get codeString() {
-    return `${this.$domainType.toString()}${[this.$levelType.toString(), this.$seriesType, this.$priority, this.code()].join('-')}`;
+    return `${this.$domainType.toString()}${[this.$levelType.toString(), this.seriesType, this.priority, this.code].join('-')}`;
   }
 
   get codeStringWithMsg() {
