@@ -54,10 +54,10 @@ class Model {
 
     return {
       ...this.indexType,
-      refresh: true,
+      refresh: query.fresh,
       body: {
-        size: query.page.size || query.size || 10000,
-        from: query.from,
+        size: page.size || query.size || 10000,
+        from: page.from || query.from,
         query: query.where,
         sort: query.sort,
         script: query.script,
@@ -111,6 +111,8 @@ class Model {
   }
 
   destroy(query) {
+    query.fresh = true;
+
     if (query.where && query.where.id) {
       return this.destroyById(query.where.id);
     }
@@ -131,6 +133,7 @@ class Model {
 
   update(query, doc) {
     query.doc = doc;
+    query.fresh = true;
     if (query.where.id) {
       if (query.upsert) {
         throw new Error('[elastic] cannot upsert with id');
