@@ -3,17 +3,22 @@ const { statSync } = require('fs');
 
 const DBS = {
   mysql: require('./mysql'),
-  elastic: require('./elastic')
+  elastic: require('./elastic'),
+  redis: require('./redis')
 };
 
 const discoverDefine = (path) => {
-  const stat = statSync(path);
+  try {
+    const stat = statSync(path);
 
-  if (!stat.isFile()) {
-    throw new Error(`db define must be js file like '{name}.define.js': ${path}`);
+    if (!stat.isFile()) {
+      return undefined;
+    }
+
+    return require(path);
+  } catch (e) {
+    return undefined;
   }
-
-  return require(path);
 };
 
 exports.all = (App) => {
@@ -27,6 +32,10 @@ exports.all = (App) => {
       return;
     }
 
-    DBS[dbName](App, discoverDefine(resolve(basePath, `./${dbName}.define.js`)));
+    if (typeof DBS[dbName] === 'function') {
+      DBS[dbName](App, discoverDefine(resolve(basePath, `./${dbName}.define.js`)));
+    } else {
+      throw new Error(`cannot find ${dbName} driver, maybe not required`);
+    }
   });
 };

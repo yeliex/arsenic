@@ -1,6 +1,6 @@
 {
   "name": "@bee/arsenic",
-  "version": "0.1.12",
+  "version": "0.2.1",
   "description": "beesport node base server",
   "main": "src/index.js",
   "scripts": {
@@ -20,7 +20,6 @@
   "author": "yeliex",
   "license": "UNLICENSED",
   "dependencies": {
-    "@bee/foundation": "^0.0.15",
     "autofetch": "^4.1.0",
     "extend2": "^1.0.0",
     "glob": "^7.1.2",
@@ -39,6 +38,7 @@
     "mysql": "^2.14.1",
     "qs": "^6.5.0",
     "raven": "^2.1.1",
+    "redis": "^2.8.0",
     "sequelize": "3",
     "ua-parser": "^0.3.5",
     "xml2js": "^0.4.17"
@@ -51,5 +51,8 @@
   },
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "peerDependencies": {
+    "@bee/foundation": "^0.0.27"
+  }
 }
