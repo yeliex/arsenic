@@ -62,7 +62,8 @@ class Model {
         sort: query.sort,
         script: query.script,
         upsert: query.upsert === true ? query.doc : query.upsert,
-        doc: query.doc
+        doc: query.doc,
+        aggs: query.aggs
       }
     };
   }
