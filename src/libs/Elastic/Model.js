@@ -68,6 +68,11 @@ class Model {
     };
   }
 
+  /**
+   * Find One By ID
+   * @param id
+   * @returns {Promise.<Instance>} result or undefined
+   */
   findById(id) {
     return this.client.get({
       ...this.indexType,
@@ -76,6 +81,11 @@ class Model {
     }).then(this.$Instance.parse.bind(this));
   }
 
+  /**
+   * Exist
+   * @param id
+   * @returns {Promise.<boolean>}
+   */
   exist(id) {
     return this.client.exist({
       ...this.indexType,
@@ -83,33 +93,61 @@ class Model {
     });
   }
 
+  /**
+   * count
+   * @param query
+   * @returns {Promise.<number>}
+   */
   count(query) {
     return this.client.count(this.getQuery(query)).then((res) => res.count);
   }
 
-  findOne(...args) {
-    return this.search(...args).then((data) => this.$Instance.parse.bind(this)(data[0]));
+  /**
+   * Find One
+   * @param query
+   * @returns {Promise.<Instance>}
+   */
+  findOne(query) {
+    query.size = 1;
+    return this.search(query).then(res => res[0]);
   }
 
-  find(query, ...args) {
+  /**
+   * Find Query
+   * @param query
+   * @returns {Promise.<Array[Instance]>}
+   */
+  find(query) {
     if (query.where && query.where.id) {
-      return this.findById(query.where.id, ...args);
+      return this.findById(query.where.id);
     }
-    return this.search(query, ...args);
+    return this.search(query);
   };
 
   search(query) {
-    return this.client.search(this.getQuery(query)).then(this.$Instance.parse.bind(this));
+    return this.client.search(this.getQuery(query)).then((res = {}) => {
+      return (res.hits || {}).hits || [];
+    }).then(this.$Instance.parse.bind(this));
   }
 
+  /**
+   * Delete By Id
+   * @param id
+   * @returns {Promise.<boolean>}
+   */
   destroyById(id) {
     return this.client.delete({
       ...this.indexType,
       id,
       refresh: true
-    });
+    }).then((res) => ['deleted', 'not_found'].includes(res.result));
   }
 
+  /**
+   * Delete
+   * @param query
+   * @returns {Promise.<number>} deleted count
+   */
   destroy(query) {
     query.fresh = true;
 
@@ -117,9 +155,15 @@ class Model {
       return this.destroyById(query.where.id);
     }
 
-    return this.client.deleteByQuery(this.getQuery(query));
+    return this.client.deleteByQuery(this.getQuery(query)).then((res) => res.deleted);
   }
 
+  /**
+   * Update By Id
+   * @param id
+   * @param doc
+   * @returns {Promise.<object>}
+   */
   updateById(id, doc) {
     return this.client.update({
       ...this.indexType,
@@ -128,31 +172,65 @@ class Model {
       body: {
         doc
       }
+    }).then((res) => {
+      return {
+        success: true,
+        id: res._id,
+        upsert: !!res.created
+      };
     });
   }
 
+  /**
+   * Update by quert
+   * @param query
+   * @param doc(by id) or script(by query)
+   * @return {Promise.<Object>}
+   */
   update(query, doc) {
-    query.doc = doc;
     query.fresh = true;
     if (query.where.id) {
+      query.doc = doc;
       if (query.upsert) {
         throw new Error('[elastic] cannot upsert with id');
       }
       return this.updateById(query.where.id);
     }
-    return this.client.update(this.getQuery(query));
+    query.script = doc;
+    return this.client.update(this.getQuery(query)).then((res) => {
+      return {
+        success: true,
+        id: res._id,
+        updated: !!res.updated,
+        total: res.total,
+        failures: res.failures
+      };
+    });
   }
 
-  upsert(query, doc) {
-    return this.update(query, doc);
-  }
+  /**
+   * @alias update
+   */
+  upsert = this.update;
 
+  /**
+   * Create By Id
+   * @param id
+   * @param doc
+   * @return {Promise.<T>}
+   */
   createById(id, doc) {
-    return this.client.index({
+    return this.client.create({
       ...this.indexType,
       id,
       refresh: true,
       body: doc
+    }).then((res) => {
+      return {
+        success: ['updated', 'created'].includes(res.result),
+        update: res.result === 'updated',
+        id: res._id
+      };
     }).catch((e) => {
       if (e.statusCode === 409) {
         return Promise.reject('id已存在');
@@ -161,11 +239,21 @@ class Model {
     });
   }
 
+  /**
+   * Create
+   * @param doc
+   * @return {Promise.<object>}
+   */
   create(doc) {
-    return this.client.index({
+    return this.client.create({
       ...this.indexType,
       refresh: true,
       body: doc
+    }).then((res) => {
+      return {
+        success: res.created,
+        id: res._id
+      };
     });
   }
 }

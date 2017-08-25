@@ -10,74 +10,72 @@ const _ = {
 };
 
 module.exports = (model) => {
-  class Instance extends Object {
-    @Private
-    $raw = {};
-
-    @Private
-    $extra = {};
-
-    @Private
-    $origin = {};
-
-    constructor(raw, extra) {
-      super(raw);
-      this.$raw = raw;
-      this.$origin = _.cloneDeep(raw);
-      this.$extra = extra;
-    }
-
-    static parse = parse;
-
-    static decorate = decorate;
-
-    get raw() {
-      return this.$extra;
-    }
-
-    set(key, value) {
-      this.$raw[key] = value;
-    }
-
-    get(key) {
-      return this[key];
-    }
-
-    save() {
-      if (_.isEqual(this.$raw, this.$origin)) {
-        return;
+  const Instance = function Instance(raw, extra) {
+    const origin = _.cloneDeep(raw);
+    const that = new Object(raw);
+    Object.defineProperties(that, {
+      raw: {
+        get() {
+          return extra;
+        }
+      },
+      get: {
+        value(key) {
+          return this[key];
+        }
+      },
+      set: {
+        value(key, value) {
+          this[key] = value;
+        }
+      },
+      save: {
+        value() {
+          if (_.isEqual(this, origin)) {
+            return Promise.resolve({
+              success: true,
+              id: this.id,
+              updated: false,
+              total: 0,
+              failures: []
+            });
+          }
+          if (raw.id) {
+            return model.updateById(raw.id, this.raw);
+          }
+          return model.create(this.raw);
+        }
+      },
+      destroy: {
+        value() {
+          return model.destroyById(extra.id);
+        }
+      },
+      update: {
+        value: (doc) => {
+          Object.keys(doc).forEach((k) => {
+            this.set(k, doc[k]);
+          });
+          return this.save();
+        }
+      },
+      toString: {
+        value() {
+          return JSON.stringify(this);
+        }
       }
-      if (this.$raw.id) {
-        return model.updateById(this.$raw.id, this.raw);
-      }
-      return model.create(this.raw);
-    }
+    });
 
-    destroy() {
-      return model.destroyById(this.$extra.id);
-    }
-
-    update(doc = {}) {
-      Object.keys(doc).forEach((k) => {
-        this.set(k, doc[k]);
-      });
-      return this.save();
-    }
-
-    toString = this.toJson;
-
-    toJson() {
-      return JSON.stringify(this.$raw);
-    }
-  }
+    return that;
+  };
 
   // 将es数据库查询结果转化为Instance对象
-  function parse(data) {
+  Instance.parse = (data) => {
     if (!data) {
       return data;
     }
     if (data instanceof Array) {
-      return data.map(item => parse(item));
+      return data.map(item => Instance.parse(item));
     }
     const { _id, _score, _source, _version, _index, _type } = data;
 
@@ -88,9 +86,9 @@ module.exports = (model) => {
       index: _index,
       type: _type
     });
-  }
+  };
 
-  function decorate(doc) {
+  Instance.decorate = (doc) => {
     const current = new Date();
     doc.utc_create = doc.utc_create || current;
     doc.utc_modified = current;
@@ -100,7 +98,7 @@ module.exports = (model) => {
     }
 
     return doc;
-  }
+  };
 
   return Instance;
 };
