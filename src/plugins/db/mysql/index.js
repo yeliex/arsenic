@@ -20,7 +20,7 @@ module.exports = (App, define) => {
 
   const { db, host = 'localhost', port = 3306, user, passwd } = config;
 
-  Object.keys({ name, user, passwd }).forEach((k) => {
+  Object.keys({ db: name, user, passwd }).forEach((k) => {
     if (!config[k]) {
       throw new Error(`${k} cannot be undefined`);
     }

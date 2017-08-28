@@ -1,6 +1,6 @@
 {
   "name": "@bee/arsenic",
-  "version": "0.2.1",
+  "version": "0.3.0-dev2",
   "description": "beesport node base server",
   "main": "src/index.js",
   "scripts": {
@@ -39,8 +39,10 @@
     "qs": "^6.5.0",
     "raven": "^2.1.1",
     "redis": "^2.8.0",
+    "rocketmq": "^1.0.0",
     "sequelize": "3",
     "ua-parser": "^0.3.5",
+    "urllib": "^2.24.0",
     "xml2js": "^0.4.17"
   },
   "devDependencies": {

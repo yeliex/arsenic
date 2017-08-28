@@ -82,6 +82,8 @@ class App {
     plugins.service(AppPrivate);
     plugins.controller(AppPrivate);
     plugins.router(AppPrivate);
+
+    plugins.mq(this);
   }
 
   get load() {

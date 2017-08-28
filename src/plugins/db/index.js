@@ -26,7 +26,7 @@ exports.all = (App) => {
     return ['mongo', 'redis', 'mysql', 'elastic', 'redis'].includes(k);
   });
 
-  const basePath = resolve(App.config.cwd, './config');
+  const basePath = resolve(App.config.cwd, './define');
   const dbs = supportDB.forEach((dbName) => {
     if (!App.config.plugins[dbName] || !App.config.plugins[dbName].enable) {
       return;

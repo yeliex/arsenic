@@ -9,5 +9,9 @@ exports.plugins = {
   redis: {
     enable: true,
     host: '192.168.1.117'
+  },
+  mq: {
+    enable: true,
+    namesrvAddr: '192.168.1.161:9876'
   }
 };
