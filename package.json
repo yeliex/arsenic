@@ -1,6 +1,6 @@
 {
   "name": "@bee/arsenic",
-  "version": "0.3.0-beta3",
+  "version": "0.3.0-beta5",
   "description": "beesport node base server",
   "main": "src/index.js",
   "scripts": {
@@ -29,6 +29,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "autofetch": "^4.1.0",
+    "bluebird": "^3.5.0",
     "extend2": "^1.0.0",
     "glob": "^7.1.2",
     "inflection": "^1.12.0",
