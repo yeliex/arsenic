@@ -35,7 +35,7 @@ fetch.callback((response) => {
     }
 
     fetchLog.info(`[response][${response.status}] ${requestid} ${response.url} ${JSON.stringify(res)}`);
-    return res.data || res;
+    return res.data || res.data === false ? res.data : res;
   }).catch((e) => {
     fetchLog.error(`[response][${response.status}] ${requestid} ${response.url} ${typeof e === 'object' ? JSON.stringify(e) : e}`);
     if (e.code === 'S0-000-00-0002') {
