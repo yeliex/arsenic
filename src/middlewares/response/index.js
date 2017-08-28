@@ -1,6 +1,7 @@
 'use strict';
 
 const { STATUS_CODES } = require('http');
+const { Error: BaseError } = require('@bee/foundation');
 
 module.exports = (app) => {
   return async (ctx, next) => {
@@ -10,7 +11,7 @@ module.exports = (app) => {
     ctx.throw = (...args) => {
       const response = {
         code: 404,
-        data: ''
+        data: undefined
       };
 
       const opts = args[2] || {};
@@ -33,6 +34,14 @@ module.exports = (app) => {
         case  1: {
           if (!isNaN(Number(args[0]))) {
             response.code = args[0];
+            break;
+          }
+          if (args[0] instanceof BaseError) {
+            response.code = 200;
+            response.data = {
+              code: args[0].codeString,
+              message: args[0].message
+            };
             break;
           }
           if (args[0] instanceof Error) {
@@ -110,7 +119,7 @@ module.exports = (app) => {
 
       response.data = {
         code: response.data.code || response.code,
-        data: response.data.data || '',
+        data: response.data.data,
         message: response.data.message || (response.code > 400 ? STATUS_CODES[ctx.status] : '')
       };
 
