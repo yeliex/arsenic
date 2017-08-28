@@ -1,6 +1,6 @@
 {
   "name": "@bee/arsenic",
-  "version": "0.3.0-beta2",
+  "version": "0.3.0-beta3",
   "description": "beesport node base server",
   "main": "src/index.js",
   "scripts": {
@@ -12,6 +12,14 @@
     "type": "git",
     "url": "git@gitlab.117sport.com:packages/arsenic.git"
   },
+  "files": [
+    "src",
+    "test",
+    "package.json",
+    "readme.md",
+    "yarn.lock",
+    "example"
+  ],
   "keywords": [
     "beesport",
     "node",
@@ -46,7 +54,7 @@
     "xml2js": "^0.4.17"
   },
   "devDependencies": {
-    "@bee/foundation": "^0.0.27",
+    "@bee/foundation": "^0.0.28",
     "chai": "^4.1.1",
     "eslint": "^4.4.0",
     "mocha": "^3.5.0",
@@ -56,6 +64,6 @@
     "lint"
   ],
   "peerDependencies": {
-    "@bee/foundation": "^0.0.27"
+    "@bee/foundation": "^0.0.28"
   }
 }

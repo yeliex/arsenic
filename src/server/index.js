@@ -153,6 +153,16 @@ class App {
     return AppPrivate.search;
   }
 
+  //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
+  get redis(){
+    return AppPrivate.redis;
+  }
+
+  //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
+  get mq(){
+    return AppPrivate.mq;
+  }
+
   //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get router() {
     return AppPrivate.router;
