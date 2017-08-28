@@ -13,12 +13,12 @@ const dbs = {};
 module.exports = (App, define) => {
   const config = App.config.plugins.mysql;
 
-  if (Object.keys(define).length < 1 || !config.enable) {
+  if (typeof define !== 'function' || !config.enable) {
     App.db = {};
     return {};
   }
 
-  const { db, host = 'localhost', port = 3306, user, passwd } = config;
+  const { db: name, host = 'localhost', port = 3306, user, passwd } = config;
 
   Object.keys({ db: name, user, passwd }).forEach((k) => {
     if (!config[k]) {
@@ -50,7 +50,7 @@ module.exports = (App, define) => {
     return sequelizeDefine.call(sequelize, arga, fundation.model(argb), fundation.option(argc));
   };
 
-  const models = config.sequelize(sequelize);
+  const models = define(sequelize);
 
   Object.keys(models).forEach((key) => {
     const name = `${_.camelCase(key)}`;

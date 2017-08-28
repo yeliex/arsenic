@@ -43,8 +43,20 @@ class Context {
     return this.ctx.App.db;
   }
 
-  get search(){
+  get search() {
     return this.ctx.App.search;
+  }
+
+  get cache() {
+    return this.ctx.App.redis;
+  }
+
+  get redis() {
+    return this.cache;
+  }
+
+  get mq() {
+    return this.ctx.App.mq;
   }
 
   get user() {

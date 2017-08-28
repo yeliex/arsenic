@@ -11,7 +11,7 @@ module.exports = (App) => {
   App.Error = Error;
 
   // 读取错误配置文件设置
-  App.Errors = require(resolve(App.config.cwd, './config/errors.define.js'));
+  App.Errors = require(resolve(App.config.cwd, './define/errors.define.js'));
 
   Object.keys(Error.Errors).forEach((k) => {
     if(App.Errors[k]){
