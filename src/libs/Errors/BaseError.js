@@ -44,7 +44,7 @@ class BaseError {
    * @returns {Error}
    */
   copy() {
-    const errors = new Error();
+    const errors = new BaseError();
 
     errors.domainType = this.domainType;
     errors.code = this.code;
