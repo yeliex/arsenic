@@ -2,7 +2,7 @@
 const { Error: BaseError } = require('@bee/foundation');
 
 module.exports = (App) => (error, ctx) => {
-  App.logger.error.error(`${error}`);
+  App.logger.error.error(error);
   if (error instanceof BaseError) {
     ctx.throw(error);
     return;
