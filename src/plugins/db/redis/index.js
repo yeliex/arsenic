@@ -5,7 +5,7 @@
  * @create: 2017/8/24 下午2:42
  */
 const Redis = require('redis');
-const { promisify } = require('@bee/foundation');
+const { promisifyAll } = require('bluebird');
 
 module.exports = (App, define) => {
   const config = App.config.plugins.redis;
@@ -28,7 +28,8 @@ module.exports = (App, define) => {
     }
   });
 
-  promisify(Redis.RedisClient.prototype);
+  promisifyAll(Redis.RedisClient.prototype);
+  promisifyAll(Redis.Multi.prototype);
 
   client.on('error', (err) => {
     App.logger.app.error(`[Redis] ${err}`);
