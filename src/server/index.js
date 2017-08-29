@@ -134,6 +134,16 @@ class App {
   }
 
   //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  get Error() {
+    return AppPrivate.Error;
+  }
+
+  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  get Errors() {
+    return AppPrivate.Errors;
+  }
+
+  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get logger() {
     return AppPrivate.logger;
   }
@@ -154,12 +164,12 @@ class App {
   }
 
   //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
-  get redis(){
+  get redis() {
     return AppPrivate.redis;
   }
 
   //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
-  get mq(){
+  get mq() {
     return AppPrivate.mq;
   }
 
