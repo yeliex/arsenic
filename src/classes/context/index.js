@@ -7,6 +7,14 @@ class Context {
     return this.ctx.App;
   }
 
+  get Error() {
+    return this.ctx.App.Error;
+  }
+
+  get Errors() {
+    return this.ctx.App.Errors;
+  }
+
   get controller() {
     return this.ctx.controller;
   }

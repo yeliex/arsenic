@@ -2,6 +2,8 @@ const Context = require('../../../src/classes/context/index');
 
 class User extends Context {
   a() {
+    throw new this.Errors.TEST_ERROR();
+
     return this.service.user.getUserList().then((res) => {
       this.throw(200, res);
     });

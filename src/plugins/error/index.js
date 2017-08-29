@@ -11,10 +11,10 @@ module.exports = (App) => {
   App.Error = Error;
 
   // 读取错误配置文件设置
-  App.Errors = require(resolve(App.config.cwd, './define/errors.define.js'));
+  App.Errors = require(resolve(App.config.cwd, './define/errors.define.js')) || {};
 
   Object.keys(Error.Errors).forEach((k) => {
-    if(App.Errors[k]){
+    if (App.Errors[k]) {
       throw new Error(`Duplicate error: ${k}, do not redefine reserved error`);
     }
     App.Errors[k] = Error.Errors[k];
