@@ -1,6 +1,6 @@
 {
   "name": "@bee/foundation",
-  "version": "0.0.28",
+  "version": "0.1.0",
   "description": "beesport node foundations",
   "main": "lib/index.js",
   "files": [

@@ -140,7 +140,7 @@ class BaseError {
   }
 
   get codeString() {
-    return `${this.$domainType.toString()}${[this.$levelType.toString(), this.seriesType, this.priority, this.code].join('-')}`;
+    return `${this.$domainType.toString()}${[this.$levelType.toString(), this.seriesType, `${this.source}${this.priority}`, this.code].join('-')}`;
   }
 
   get codeStringWithMsg() {
