@@ -7,11 +7,15 @@
 
 module.exports = {
   user: {
-    comsumer: 'CID_node_service_message_user',
+    consumer: 'CID_service_node_message_user',
     topic: 'service_user',
     tags: [
       'user_join_company',
       'user_leave_company'
     ]
+  },
+  message: {
+    producer: 'PID_service_node_message',
+    topic: 'service_node_message'
   }
 };

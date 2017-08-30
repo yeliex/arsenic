@@ -83,7 +83,7 @@ class App {
     plugins.controller(AppPrivate);
     plugins.router(AppPrivate);
 
-    plugins.mq(this);
+    plugins.mq(AppPrivate);
   }
 
   get load() {
