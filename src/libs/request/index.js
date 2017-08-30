@@ -26,7 +26,7 @@ fetch.callback((response) => {
   }).then((data) => {
     return response.ok ? data : Promise.reject(response.status === 500 ? data : {
       code: response.status,
-      message: (data || {}).message || data || response.statusText
+      message: (data || {}).msg || (data || {}).message || data || response.statusText
     });
   }).then((res) => {
     // ...log
