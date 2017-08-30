@@ -60,7 +60,7 @@ class Topic {
       if (!total.some(res => res !== true)) {
         ack();
       }
-      console.warn(`[MQ Response] ${msgs} ${total}`);
+      console.warn(`[mq:producer:response] ${msgs} ${total}`);
     });
   }
 
@@ -69,7 +69,7 @@ class Topic {
     tags = typeof tags === 'string' ? tags.replace(/ /g, '').split('||') : tags;
     tags.forEach((tag) => {
       if (this.Listeners[tag]) {
-        throw new Error(`Duplicate listener: ${this.Topic}=>${tag}`);
+        console.error(`[mq: client] Duplicate listener: ${this.Topic}=>${tag}, ignore`);
       }
       this.Listeners[tag] = {
         handler: handler
