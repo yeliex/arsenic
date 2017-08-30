@@ -53,6 +53,7 @@ class Topic {
       promise = promise.then((total = []) => {
         return this.dispatchMsg(msg).then((res) => {
           total.push(res);
+          return total;
         });
       });
     });
