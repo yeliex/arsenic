@@ -2,6 +2,7 @@ const RocketMQ = require('rocketmq');
 const urllib = require('urllib');
 const assert = require('assert');
 const co = require('co');
+const user = require('os').userInfo().username;
 const Message = require('./Message');
 
 class Topic {
@@ -15,7 +16,7 @@ class Topic {
     if (consumer) {
       this.Comsumer = new RocketMQ.Consumer({
         ...config,
-        consumerGroup: consumer,
+        consumerGroup: config.debug ? `${consumer}_${user}` : consumer,
         urllib
       });
 
@@ -29,7 +30,7 @@ class Topic {
     if (producer) {
       this.Producer = new RocketMQ.Producer({
         ...config,
-        producerGroup: producer,
+        producerGroup: config.debug ? `${producer}_${user}` : producer,
         urllib
       });
     }
