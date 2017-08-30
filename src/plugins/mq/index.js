@@ -1,5 +1,5 @@
 const { resolve } = require('path');
-const MQ = require('./MQ');
+const { MQ } = require('@bee/foundation');
 
 module.exports = (App) => {
   const config = App.config.plugins.mq || {};

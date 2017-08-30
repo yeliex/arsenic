@@ -87,7 +87,6 @@ module.exports = (app) => {
   process.env.NODE_ENV = env;
 
   app.config = config;
-  app.cwd = config;
 
   return config;
 };

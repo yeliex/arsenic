@@ -2,10 +2,11 @@
 # yarn lockfile v1
 
 
-"@bee/foundation@^0.1.0":
-  version "0.1.0"
-  resolved "https://npm.117sport.com/@bee%2ffoundation/-/foundation-0.1.0.tgz#87efa8bb6b8669398d6f15d4f4efc866d8fadf5f"
+"@bee/foundation@^0.2.0":
+  version "0.2.0"
+  resolved "https://npm.117sport.com/@bee%2ffoundation/-/foundation-0.2.0.tgz#fd9f8e56b4a12b9c52cc0cdabac2a6d68da96692"
   dependencies:
+    co "^4.6.0"
     elasticsearch "^13.3.1"
     lodash "^4.17.4"
 
