@@ -118,9 +118,9 @@ module.exports = (app) => {
       ctx.status = response.code;
 
       response.data = {
-        code: response.data.code || response.code,
-        data: response.data.data,
-        msg: response.data.message || (response.code > 400 ? STATUS_CODES[ctx.status] : '')
+        code: (response.data || {}).code || response.code,
+        data: (response.data || {}).data,
+        msg: (response.data || {}).message || (response.code > 400 ? STATUS_CODES[ctx.status] : '')
       };
 
       if (opts.json && typeof response.data === 'object') {
