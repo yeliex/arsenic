@@ -120,7 +120,7 @@ module.exports = (app) => {
       response.data = {
         code: response.data.code || response.code,
         data: response.data.data,
-        message: response.data.message || (response.code > 400 ? STATUS_CODES[ctx.status] : '')
+        msg: response.data.message || (response.code > 400 ? STATUS_CODES[ctx.status] : '')
       };
 
       if (opts.json && typeof response.data === 'object') {
