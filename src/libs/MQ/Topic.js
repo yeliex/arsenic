@@ -14,8 +14,8 @@ class Topic {
 
     if (consumer) {
       this.Comsumer = new RocketMQ.Consumer({
+        ...config,
         consumerGroup: consumer,
-        namesrvAddr: config.namesrvAddr,
         urllib
       });
 
@@ -28,8 +28,8 @@ class Topic {
 
     if (producer) {
       this.Producer = new RocketMQ.Producer({
+        ...config,
         producerGroup: producer,
-        namesrvAddr: config.namesrvAddr,
         urllib
       });
     }
