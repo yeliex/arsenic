@@ -38,9 +38,9 @@ class Topic {
   dispatchMsg(msg) {
     return Promise.resolve().then(() => {
       const message = new Message(msg);
-      const callback = typeof this.Listeners[message.tag];
-      if (callback === 'function') {
-        return callback(message);
+      const listener = this.Listeners[message.tag] || {};
+      if (typeof listener.handler === 'function') {
+        return listener.handler(message);
       }
       console.warn(`[mq:client] no listener: ${message.tag}`);
     });
