@@ -7,9 +7,9 @@
 
 const MQ = require('./MQ');
 
-Object.defineProperty(MQ, {
+Object.defineProperties(MQ, {
   Message: require('./Message'),
   Topic: require('./Topic')
 });
 
-modul.exports = MQ;
+module.exports = MQ;

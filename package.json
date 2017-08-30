@@ -1,6 +1,6 @@
 {
   "name": "@bee/foundation",
-  "version": "0.2.0",
+  "version": "0.2.4",
   "description": "beesport node foundations",
   "main": "lib/index.js",
   "files": [
@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "eslint ./ --fix",
     "prebuild": "rm -rf lib/",
-    "build": "babel src -d ./lib",
+    "build": "babel src -d ./lib --source-maps",
     "prepublishOnly": "npm run build",
     "mocha": "mocha $(find test -name '*.js')",
     "test": "npm run lint && npm run mocha"
