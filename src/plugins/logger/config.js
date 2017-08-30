@@ -32,6 +32,11 @@ module.exports = {
       type: 'dateFile',
       pattern: '-yyyy-MM-dd',
       category: 'fetch'
+    },
+    {
+      type: 'dateFile',
+      pattern: '-yyyy-MM-dd',
+      category: 'mq'
     }
   ]
 };

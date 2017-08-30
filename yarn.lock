@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@bee/foundation@^0.2.0":
-  version "0.2.0"
-  resolved "https://npm.117sport.com/@bee%2ffoundation/-/foundation-0.2.0.tgz#fd9f8e56b4a12b9c52cc0cdabac2a6d68da96692"
+"@bee/foundation@^0.2.7":
+  version "0.2.7"
+  resolved "https://npm.117sport.com/@bee%2ffoundation/-/foundation-0.2.7.tgz#3cb5e846e9ba364a057d68a4c89592d1eb215496"
   dependencies:
     co "^4.6.0"
     elasticsearch "^13.3.1"
