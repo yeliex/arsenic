@@ -11,5 +11,7 @@ module.exports = (App) => {
 
   const define = require(resolve(App.config.cwd, './define/mq.define.js'));
 
+  config.logger = config.logger || App.logger.mq;
+
   App.mq = new MQ(config, define);
 };
