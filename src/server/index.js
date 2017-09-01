@@ -24,6 +24,8 @@ const AppPrivate = {
   router
 };
 
+plugins.noBug();
+
 class App {
   constructor(option = {}) {
     this.listening = false;

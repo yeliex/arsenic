@@ -65,7 +65,6 @@ module.exports = (app) => {
   const current = configs[env] || configs.default;
 
   const config = extend(true, {}, baseConfig, current);
-  config.plugins = extend(true, {}, baseConfig.plugins || {}, current.plugins || {});
 
   if (typeof config !== 'object') {
     throw new Error('config must be object');
