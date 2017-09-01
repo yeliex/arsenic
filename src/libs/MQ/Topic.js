@@ -12,6 +12,7 @@ class Topic {
     this.Tags = tags;
     this.Topic = topicName;
     this.Listeners = {};
+    this.Logger = config.logger || console;
 
     if (consumer) {
       this.Comsumer = new RocketMQ.Consumer({
@@ -39,6 +40,7 @@ class Topic {
   dispatchMsg(msg) {
     return Promise.resolve().then(() => {
       const message = new Message(msg);
+      this.Logger.info(`[mq:receive] ${message.toString()}`);
       const listener = this.Listeners[message.tag] || {};
       if (typeof listener.handler === 'function') {
         return listener.handler(message);
