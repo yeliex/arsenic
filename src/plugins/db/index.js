@@ -22,7 +22,7 @@ const discoverDefine = (path) => {
 };
 
 exports.all = (App) => {
-  const supportDB = Object.keys(App.config.plugins).filter((k) => {
+  const supportDB = Object.keys(App.config.plugins || {}).filter((k) => {
     return ['mongo', 'redis', 'mysql', 'elastic', 'redis'].includes(k);
   });
 
