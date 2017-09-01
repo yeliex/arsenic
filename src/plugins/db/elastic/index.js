@@ -19,7 +19,7 @@ module.exports = (App, define) => {
   }
 
   const elastic = new Elastic({
-    host: config.host
+    hosts: config.hosts ? config.hosts : [config.host]
   });
 
   const models = define(elastic);
