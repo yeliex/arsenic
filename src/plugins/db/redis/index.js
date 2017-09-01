@@ -17,15 +17,12 @@ module.exports = (App, define) => {
 
   const client = Redis.createClient({
     host: config.host,
-    port: config.port
+    port: config.port,
+    password: config.auth || config.passwd || config.password
   });
 
   client.on('ready', () => {
-    if (config.passwd) {
-      client.auth(config.passwd, (...res) => {
-        console.log(`[Redis auth] ${res}`);
-      });
-    }
+    console.log(`[Redis] connected`);
   });
 
   promisifyAll(Redis.RedisClient.prototype);

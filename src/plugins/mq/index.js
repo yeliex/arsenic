@@ -9,6 +9,10 @@ module.exports = (App) => {
     return;
   }
 
+  if (config.onsAddr) {
+    delete config.namesrvAddr;
+  }
+
   const define = require(resolve(App.config.cwd, './define/mq.define.js'));
 
   config.logger = config.logger || App.logger.mq;
