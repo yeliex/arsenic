@@ -8,7 +8,7 @@ exports.parseBucketUrl = (url, { w } = {}) => {
     return;
   }
   const parsedUrl = parse(url, true);
-  if (parsedUrl.protocol.toLowerCase() !== BUCKET_PROTOCOL) {
+  if ((parsedUrl.protocol || '').toLowerCase() !== BUCKET_PROTOCOL) {
     return url;
   }
   return format({
