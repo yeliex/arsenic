@@ -1,5 +1,8 @@
 module.exports = {
   appenders: {
+    console: {
+      type: 'console'
+    },
     'access-api': {
       type: 'dateFile',
       pattern: '-yyyy-MM-dd'
