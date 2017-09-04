@@ -78,12 +78,22 @@ class BaseError {
     this.$domainType = domainType;
   }
 
+  setDomainType(domainType) {
+    this.domainType = domainType;
+    return this;
+  }
+
   get seriesType() {
     return this.$seriesType;
   }
 
   set seriesType(seriesType) {
     this.$seriesType = seriesType;
+  }
+
+  setSeriesType(seriesType) {
+    this.seriesType = seriesType;
+    return this;
   }
 
   get source() {
@@ -94,12 +104,22 @@ class BaseError {
     this.$source = source;
   }
 
+  setSource(source) {
+    this.source = source;
+    return this;
+  }
+
   get priority() {
     return this.$priority;
   }
 
   set priority(priority) {
     this.$priority = priority;
+  }
+
+  setPriority(priority) {
+    this.priority = priority;
+    return this;
   }
 
   get code() {
@@ -110,12 +130,22 @@ class BaseError {
     this.$code = code;
   }
 
+  setCode(code) {
+    this.code = code;
+    return this;
+  }
+
   get cause() {
     return this.$cause;
   }
 
   set cause(cause) {
     this.$cause = cause;
+  }
+
+  setCause(cause) {
+    this.cause = cause;
+    return this;
   }
 
   get levelType() {
@@ -126,6 +156,11 @@ class BaseError {
     this.$levelType = levelType;
   }
 
+  setLevelType(levelType) {
+    this.levelType = levelType;
+    return this;
+  }
+
   get message() {
     return this.$message ? this.$message.toString() : this.$code.comment;
 
@@ -133,6 +168,11 @@ class BaseError {
 
   set message(message) {
     this.$message = String(message);
+  }
+
+  setMessage(message) {
+    this.message = message;
+    return this;
   }
 
   appendMsg(str) {
@@ -172,6 +212,11 @@ class BaseError {
 
   set readOnly(readOnly) {
     this.$readOnly = readOnly;
+  }
+
+  setReadOnly(readOnly) {
+    this.readOnly = readOnly;
+    return this;
   }
 
   toString() {
