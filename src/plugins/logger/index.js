@@ -1,7 +1,8 @@
-const log4js = require('koa-log4');
+const log4js = require('log4js');
 const { resolve } = require('path');
 const { mkdirSync } = require('fs');
 const globalConfig = require('./config');
+const koaLogger = require('./koa-logger');
 const _ = require('lodash');
 
 const loggers = {};
@@ -10,7 +11,7 @@ const regist = (config) => {
   config.logger = config.logger || {};
 
   const loggerConfig = {
-    appenders: [].concat(globalConfig.appenders, config.logger.appenders || []),
+    appenders: Object.assign({}, globalConfig.appenders, config.logger.appenders || {}),
     replaceConsole: config.logger.replaceConsole || globalConfig.replaceConsole
   };
 
@@ -24,17 +25,42 @@ const regist = (config) => {
     }
   }
 
-  loggerConfig.appenders = loggerConfig.appenders.map((appender) => {
-    if (appender.category) {
-      appender.filename = resolve(logPath, `${appender.category}.log`);
+  loggerConfig.categories = loggerConfig.categories || {};
+
+  loggerConfig.appenders = Object.keys(loggerConfig.appenders).map((key) => {
+    const appender = loggerConfig.appenders[key];
+
+    loggerConfig.categories[key] = loggerConfig.categories[key] || {
+      appenders: [key],
+      level: appender.level || 'info'
+    };
+
+    if (appender.console) {
+      return {
+        type: 'clustered',
+        appenders: [
+          { type: 'console' },
+          {
+            ...appender,
+            category: null,
+            daysToKeep: appender.daysToKeep && appender.daysToKeep !== 0 ? appender.daysToKeep : 7,
+            filename: appender.category ? resolve(logPath, `${key}.log`) : null
+          }
+        ],
+        category: appender.category
+      };
     }
-    return appender;
-  });
+    return {
+      ...appender,
+      daysToKeep: appender.daysToKeep && appender.daysToKeep !== 0 ? appender.daysToKeep : 7,
+      filename: resolve(logPath, `${key}.log`)
+    };
+  }, []);
 
   log4js.configure(loggerConfig);
 
-  loggerConfig.appenders.filter(({ category }) => !!category).forEach(({ category }) => {
-    loggers[_.camelCase(category)] = log4js.getLogger(category);
+  Object.keys(loggerConfig.appenders).forEach((key) => {
+    loggers[_.camelCase(key)] = log4js.getLogger(key);
   });
 
   return loggers;
@@ -51,7 +77,7 @@ const DEFAULT_FORMAT = ':remote-addr - -' +
   ' :status :response-time :content-length ":referrer"' +
   ' ":user-agent" :req[header] :req[Accept]';
 
-const accessMiddleware = () => log4js.koaLogger(loggers.accessApi, {
+const accessMiddleware = () => koaLogger(loggers.accessApi, {
   level: 'auto',
   format: DEFAULT_FORMAT
 });

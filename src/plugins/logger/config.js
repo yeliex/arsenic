@@ -1,42 +1,33 @@
 module.exports = {
-  appenders: [
-    {
-      type: 'console'
+  appenders: {
+    'access-api': {
+      type: 'dateFile',
+      pattern: '-yyyy-MM-dd'
     },
-    {
+    'access-static': {
+      type: 'dateFile',
+      pattern: '-yyyy-MM-dd'
+    },
+    'api-data': {
+      type: 'dateFile',
+      pattern: '-yyyy-MM-dd'
+    },
+    'app': {
+      type: 'dateFile',
+      pattern: '-yyyy-MM-dd'
+    },
+    'error': {
       type: 'dateFile',
       pattern: '-yyyy-MM-dd',
-      category: 'access-api'
+      console: true
     },
-    {
+    'fetch': {
       type: 'dateFile',
-      pattern: '-yyyy-MM-dd',
-      category: 'access-static'
+      pattern: '-yyyy-MM-dd'
     },
-    {
+    'mq': {
       type: 'dateFile',
-      pattern: '-yyyy-MM-dd',
-      category: 'api-data'
-    },
-    {
-      type: 'dateFile',
-      pattern: '-yyyy-MM-dd',
-      category: 'app'
-    },
-    {
-      type: 'dateFile',
-      pattern: '-yyyy-MM-dd',
-      category: 'error'
-    },
-    {
-      type: 'dateFile',
-      pattern: '-yyyy-MM-dd',
-      category: 'fetch'
-    },
-    {
-      type: 'dateFile',
-      pattern: '-yyyy-MM-dd',
-      category: 'mq'
+      pattern: '-yyyy-MM-dd'
     }
-  ]
+  }
 };
