@@ -16,6 +16,7 @@ module.exports = {
       pattern: '-yyyy-MM-dd'
     },
     'app': {
+      console: true,
       type: 'dateFile',
       pattern: '-yyyy-MM-dd'
     },
