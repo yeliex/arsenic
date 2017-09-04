@@ -31,7 +31,8 @@ const regist = (config) => {
     const appender = loggerConfig.appenders[key];
 
     const appenders = [key];
-    if (appender.console) {
+
+    if (appender.console || (config.logger.console && key !== 'mq')) {
       appenders.push('console');
     }
 
@@ -43,7 +44,7 @@ const regist = (config) => {
     }
 
     loggerConfig.categories[key] = loggerConfig.categories[key] || {
-      appenders: [key],
+      appenders,
       level: appender.level || 'info'
     };
 
