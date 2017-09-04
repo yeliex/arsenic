@@ -27,35 +27,33 @@ const regist = (config) => {
 
   loggerConfig.categories = loggerConfig.categories || {};
 
-  loggerConfig.appenders = Object.keys(loggerConfig.appenders).map((key) => {
+  loggerConfig.appenders = Object.keys(loggerConfig.appenders).reduce((total, key) => {
     const appender = loggerConfig.appenders[key];
+
+    const appenders = [key];
+    if (appender.console) {
+      appenders.push('console');
+    }
+
+    if (key === 'console') {
+      loggerConfig.categories.default = loggerConfig.categories[key] || {
+        appenders,
+        level: appender.level || 'all'
+      };
+    }
 
     loggerConfig.categories[key] = loggerConfig.categories[key] || {
       appenders: [key],
       level: appender.level || 'info'
     };
 
-    if (appender.console) {
-      return {
-        type: 'clustered',
-        appenders: [
-          { type: 'console' },
-          {
-            ...appender,
-            category: null,
-            daysToKeep: appender.daysToKeep && appender.daysToKeep !== 0 ? appender.daysToKeep : 7,
-            filename: appender.category ? resolve(logPath, `${key}.log`) : null
-          }
-        ],
-        category: appender.category
-      };
-    }
-    return {
+    total[key] = {
       ...appender,
       daysToKeep: appender.daysToKeep && appender.daysToKeep !== 0 ? appender.daysToKeep : 7,
       filename: resolve(logPath, `${key}.log`)
     };
-  }, []);
+    return total;
+  }, {});
 
   log4js.configure(loggerConfig);
 

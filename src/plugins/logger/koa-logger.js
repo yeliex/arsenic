@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const levels = require('log4js').levels;
+
 const DEFAULT_FORMAT = ':remote-addr - -' +
   ' ":method :url HTTP/:http-version"' +
   ' :status :content-length ":referrer"' +
@@ -107,7 +108,8 @@ const getKoaLogger = (logger4js, options) => {
   }
 
   const thislogger = logger4js;
-  let level = levels.toLevel(options.level, levels.INFO);
+  let level = levels.getLevel(options.level, levels.INFO);
+
   const fmt = options.format || DEFAULT_FORMAT;
   const nolog = options.nolog ? createNoLogCondition(options.nolog) : null;
 
