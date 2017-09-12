@@ -17,7 +17,7 @@ module.exports = (App) => {
   const path = resolve(cwd, './service');
 
   if (!dirExistsSync(path)) {
-    console.warn(`Controllers not exist: ${path}`);
+    console.warn(`Services not exist: ${path}`);
     return async (ctx, next) => {
       ctx.service = {};
       await next();
