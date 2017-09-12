@@ -24,7 +24,8 @@ module.exports = (app) => async (ctx, next) => {
   headers['X-UA-DeviceName'] = ctx.get('X-UA-DeviceName') || ua.device.family;
   headers['X-UA-MarketName'] = ctx.get('X-UA-MarketName') || '';
 
-  headers['ZONE_ID_HEADER'] = ctx.get('ZONE_ID_HEADER');
+  // todo: node生成一个符合java格式的timezone
+  headers['X-TZone'] = ctx.get('X-TZone');
   headers['X-Forwarded-For'] = ctx.get('X-Forwarded-For');
   headers['X-DEVICE-ID'] = ctx.get('X-DEVICE-ID');
 
