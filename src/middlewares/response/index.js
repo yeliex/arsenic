@@ -147,6 +147,16 @@ module.exports = (app) => {
       }
     };
 
+    ctx.res = (code, str) => {
+      if (!str && code) {
+        str = code;
+        code = 200;
+      }
+      str = typeof str === 'string' ? str : JSON.stringify(str);
+      ctx.body = str;
+      ctx.status = code;
+    };
+
     await next();
   };
 };
