@@ -147,7 +147,7 @@ module.exports = (app) => {
       }
     };
 
-    ctx.res = (code, str) => {
+    ctx.throwBody = (code, str) => {
       if (!str && code) {
         str = code;
         code = 200;

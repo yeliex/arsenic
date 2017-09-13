@@ -39,8 +39,8 @@ class Context {
     return this.ctx.throw;
   }
 
-  get res() {
-    return this.ctx.res;
+  get throwBody() {
+    return this.ctx.throwBody;
   }
 
   get fetch() {
