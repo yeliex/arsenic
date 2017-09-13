@@ -155,6 +155,10 @@ module.exports = (app) => {
       str = typeof str === 'string' ? str : JSON.stringify(str);
       ctx.body = str;
       ctx.status = code;
+
+      if (process.env.NODE_ENV !== 'test') {
+        app.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
+      }
     };
 
     await next();
