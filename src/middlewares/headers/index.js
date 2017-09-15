@@ -7,7 +7,7 @@ const spreadHeaders = [
   'X-System-RequestID'
 ];
 
-module.exports = () => async (ctx, next) => {
+module.exports = (app) => async (ctx, next) => {
   const headers = {};
 
   // trace
@@ -24,21 +24,17 @@ module.exports = () => async (ctx, next) => {
   headers['X-UA-DeviceName'] = ctx.get('X-UA-DeviceName') || ua.device.family;
   headers['X-UA-MarketName'] = ctx.get('X-UA-MarketName') || '';
 
-  headers['ZONE_ID_HEADER'] = ctx.get('ZONE_ID_HEADER');
+  // todo: node生成一个符合java格式的timezone
+  headers['X-TZone'] = ctx.get('X-TZone');
   headers['X-Forwarded-For'] = ctx.get('X-Forwarded-For');
   headers['X-DEVICE-ID'] = ctx.get('X-DEVICE-ID');
 
   // user
   headers['X-User-UserId'] = ctx.get('X-User-UserId');
   headers['X-User-CompanyId'] = ctx.get('X-User-CompanyId');
-  headers['X-User-Password'] = ctx.get('X-User-Password') || ctx.config.X_USER_PASSWORD;
+  headers['X-User-Password'] = ctx.get('X-User-Password') || app.config.X_USER_PASSWORD;
 
   ctx._HEADERS = new Headers(headers);
-
-  ctx._USER = Object.assign({}, ctx._USER || {}, {
-    userId: ctx.get('X-User-UserId'),
-    companyId: ctx.get('X-User-CompanyId')
-  });
 
   await next(ctx);
 };

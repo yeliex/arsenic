@@ -1,18 +1,25 @@
 {
   "name": "@bee/arsenic",
-  "version": "0.0.14",
+  "version": "1.1.5",
   "description": "beesport node base server",
   "main": "src/index.js",
   "scripts": {
-    "preinstall": "npm config set @bee:registry https://yeliex:htsxking@npm.117sport.com",
     "lint": "eslint ./ --fix",
     "mocha": "mocha $(find test -name '*.js')",
-    "test": "npm run lint && npm run mocha"
+    "test": "npm run lint &&NODE_ENV=test npm run mocha"
   },
   "repository": {
     "type": "git",
     "url": "git@gitlab.117sport.com:packages/arsenic.git"
   },
+  "files": [
+    "src",
+    "test",
+    "package.json",
+    "readme.md",
+    "yarn.lock",
+    "example"
+  ],
   "keywords": [
     "beesport",
     "node",
@@ -22,6 +29,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "autofetch": "^4.1.0",
+    "bluebird": "^3.5.0",
     "extend2": "^1.0.0",
     "glob": "^7.1.2",
     "inflection": "^1.12.0",
@@ -30,20 +38,25 @@
     "koa-better-body": "^3.0.4",
     "koa-compose": "^4.0.0",
     "koa-convert": "^1.2.0",
-    "koa-log4": "^2.2.1",
     "koa-mount": "^3.0.0",
     "koa-response": "^2.1.0",
     "koa-router": "^7.2.1",
     "lodash": "^4.17.4",
+    "log4js": "^2.3.3",
+    "mime-types": "^2.1.17",
     "minimist": "^1.2.0",
     "mysql": "^2.14.1",
     "qs": "^6.5.0",
     "raven": "^2.1.1",
+    "redis": "^2.8.0",
+    "rocketmq": "^1.0.0",
     "sequelize": "3",
     "ua-parser": "^0.3.5",
-    "xml2js": "^0.4.17"
+    "urllib": "^2.24.0",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
+    "@bee/foundation": "^1.0.1",
     "chai": "^4.1.1",
     "eslint": "^4.4.0",
     "mocha": "^3.5.0",
@@ -51,5 +64,8 @@
   },
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "peerDependencies": {
+    "@bee/foundation": "^1.0.1"
+  }
 }

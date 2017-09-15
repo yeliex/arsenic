@@ -1,16 +1,17 @@
 'use strict';
 
 const { STATUS_CODES } = require('http');
+const { Error: BaseError } = require('@bee/foundation');
 
-module.exports = (options = {}) => {
-  const { cors = false } = options;
-
+module.exports = (app) => {
   return async (ctx, next) => {
+    const userAgent = process.env.NODE_ENV === 'test' ? '' : ctx.get('user-agent');
+
     //noinspection JSCommentMatchesSignature
     ctx.throw = (...args) => {
       const response = {
         code: 404,
-        data: ''
+        data: undefined
       };
 
       const opts = args[2] || {};
@@ -33,6 +34,14 @@ module.exports = (options = {}) => {
         case  1: {
           if (!isNaN(Number(args[0]))) {
             response.code = args[0];
+            break;
+          }
+          if (args[0] instanceof BaseError) {
+            response.code = 200;
+            response.data = {
+              code: args[0].codeString,
+              message: args[0].message
+            };
             break;
           }
           if (args[0] instanceof Error) {
@@ -109,9 +118,9 @@ module.exports = (options = {}) => {
       ctx.status = response.code;
 
       response.data = {
-        code: response.data.code || response.code,
-        data: response.data.data || '',
-        message: response.data.message || (response.code > 400 ? STATUS_CODES[ctx.status] : '')
+        code: (response.data || {}).code || response.code,
+        data: (response.data || {}).data,
+        msg: (response.data || {}).message || (response.code > 400 ? STATUS_CODES[ctx.status] : '')
       };
 
       if (opts.json && typeof response.data === 'object') {
@@ -121,7 +130,7 @@ module.exports = (options = {}) => {
         ctx.set('Content-Type', ctx.get('Content-Type') || 'text/html;charset=utf8');
       }
 
-      if (cors || ctx.get('referer') || ctx.get('user-agent').match(/([Mm])ozilla/)) {
+      if (ctx.get('referer') || userAgent.match(/([Mm])ozilla/)) {
         ctx.set({
           'Access-Control-Allow-Origin': ctx.get('origin') || '*',
           'Access-Control-Allow-Credentials': 'true',
@@ -133,7 +142,23 @@ module.exports = (options = {}) => {
 
       ctx.body = response.data;
 
-      ctx.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
+      if (process.env.NODE_ENV !== 'test') {
+        app.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
+      }
+    };
+
+    ctx.throwBody = (code, str) => {
+      if (!str && code) {
+        str = code;
+        code = 200;
+      }
+      str = typeof str === 'string' ? str : JSON.stringify(str);
+      ctx.body = str;
+      ctx.status = code;
+
+      if (process.env.NODE_ENV !== 'test') {
+        app.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
+      }
     };
 
     await next();

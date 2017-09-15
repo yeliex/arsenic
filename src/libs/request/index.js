@@ -1,12 +1,18 @@
 const fetch = require('autofetch');
+const { stringify } = require('qs');
 
-let fetchLog = (require('../../index').Logger || {}).fetch;
+let fetchLog = null;
 
-fetch.baseHost((path) => {
+fetch.baseHost((path, options) => {
   const host = process.env.NODE_ENV === 'production' ? '117sport.net' : '117sport.org';
-  return path.replace(/^\/\/([A-Z-_]{1,})/, (a, b) => {
+  const url = path.replace(/^\/\/([A-Z-_]{1,})/, (a, b) => {
     return `http://service-${b.toLowerCase()}.${host}`;
   });
+
+  if (options.query) {
+    return `${url}${url.match(/\?/) ? '&' : '?'}${stringify(options.query)}`;
+  }
+  return url;
 });
 
 fetch.callback((response) => {
@@ -20,7 +26,7 @@ fetch.callback((response) => {
   }).then((data) => {
     return response.ok ? data : Promise.reject(response.status === 500 ? data : {
       code: response.status,
-      message: (data || {}).message || data || response.statusText
+      message: (data || {}).msg || (data || {}).message || data || response.statusText
     });
   }).then((res) => {
     // ...log
@@ -29,7 +35,7 @@ fetch.callback((response) => {
     }
 
     fetchLog.info(`[response][${response.status}] ${requestid} ${response.url} ${JSON.stringify(res)}`);
-    return res.data || res;
+    return res.data || res.data === false ? res.data : res;
   }).catch((e) => {
     fetchLog.error(`[response][${response.status}] ${requestid} ${response.url} ${typeof e === 'object' ? JSON.stringify(e) : e}`);
     if (e.code === 'S0-000-00-0002') {
@@ -43,9 +49,9 @@ fetch.headers({
   'User-Agent': 'node-fetch/1.0 autofetch/3 node beesport/3 like(BeeSport/3.0-660.1 (iPhone6; iOS/9.3))'
 });
 
-module.exports = (url, options = {}) => {
+module.exports = (app) => (url, options = {}) => {
   if (!fetchLog) {
-    fetchLog = require('../../index').Logger.fetch;
+    fetchLog = app.logger.fetch;
   }
   fetchLog.info(`[${options.method || 'GET'}] ${url} ${options.mock ? 'mock' : ''}`);
   return fetch(url, options);

@@ -10,3 +10,4 @@ node_modules
 package-lock.json
 dist/
 assets/build
+example/logs
