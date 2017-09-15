@@ -7,34 +7,27 @@ const { resolve } = require('path');
 const { existsSync, dirExistsSync } = require('../../libs/utils/fs/index');
 const requireContext = require('../../libs/utils/require_context/index');
 
-const total = {};
-
-const regist = ({ cwd }) => {
-  const path = resolve(cwd, './middleware');
+module.exports = (App) => {
+  const cwd = App.option.cwd;
+  const path = resolve(cwd, './plugins');
 
   if (!dirExistsSync(path)) {
     return async (ctx, next) => {
-      ctx.middleware = {};
+      ctx.plugins = {};
       await next();
     };
   }
 
-  const middlewares = requireContext('./*', {
+  const plugins = requireContext('./*', {
     cwd: path,
     exclude: /\.js$/
   });
 
-  const keys = Object.keys(middlewares);
+  const keys = Object.keys(plugins);
 
-  keys.forEach((key) => {
-    total[key] = middlewares[key];
-  });
+  App.plugin = keys.reduce((total, key) => {
+    total[key] = plugins[key];
+
+    return total;
+  }, {});
 };
-
-Object.defineProperties(total, {
-  regist: {
-    value: regist
-  }
-});
-
-module.exports = total;

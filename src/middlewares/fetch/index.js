@@ -10,7 +10,7 @@ const headersToObject = (headers) => {
   }, {});
 };
 
-module.exports = () => async (ctx, next) => {
+module.exports = (app) => async (ctx, next) => {
   let index = 1;
 
   const headers = headersToObject(ctx._HEADERS || {});
@@ -24,7 +24,7 @@ module.exports = () => async (ctx, next) => {
       ...headersToObject(options.headers || {}),
       'x-system-rpcid': `${rpcId}.${index++}`
     };
-    return fetch(url, options);
+    return app.fetch(url, options);
   };
 
   await next(ctx);

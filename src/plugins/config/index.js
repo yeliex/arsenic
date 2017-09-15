@@ -25,7 +25,9 @@ const env = (() => {
   return 'development';
 })();
 
-module.exports = ({ cwd }) => {
+module.exports = (app) => {
+  const cwd = app.option.cwd || process.cwd();
+
   const path = resolve(cwd, './config');
 
   if (!dirExistsSync(path)) {
@@ -60,7 +62,10 @@ module.exports = ({ cwd }) => {
 
   configs.default = configs.default || {};
 
-  const config = extend(true, {}, baseConfig, configs[env] || configs.default);
+  const current = configs[env] || configs.default;
+
+  const config = extend(true, {}, baseConfig, current);
+  config.plugins = config.plugins || {};
 
   if (typeof config !== 'object') {
     throw new Error('config must be object');
@@ -80,6 +85,8 @@ module.exports = ({ cwd }) => {
   });
 
   process.env.NODE_ENV = env;
+
+  app.config = config;
 
   return config;
 };
