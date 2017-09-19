@@ -12,15 +12,15 @@ class Elastic {
   $models = {};
 
   @Private
-  $host;
+  $hosts;
 
   @Private
   $client;
 
-  constructor({ host } = {}) {
-    this.$host = host;
+  constructor({ hosts } = {}) {
+    this.$hosts = hosts;
     this.$client = new Elasticsearch.Client({
-      host
+      hosts
     });
   }
 
