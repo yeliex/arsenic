@@ -17,8 +17,8 @@ class Elastic {
   @Private
   $client;
 
-  constructor({ hosts } = {}) {
-    this.$hosts = hosts;
+  constructor({ hosts, host } = {}) {
+    this.$hosts = hosts || [host];
     this.$client = new Elasticsearch.Client({
       hosts
     });
