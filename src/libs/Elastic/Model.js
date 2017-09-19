@@ -245,7 +245,7 @@ class Model {
    * @return {Promise.<object>}
    */
   create(doc) {
-    return this.client.create({
+    return this.client.index({
       ...this.indexType,
       refresh: true,
       body: doc
