@@ -3,7 +3,7 @@ const { stringify } = require('qs');
 
 let fetchLog = null;
 
-fetch.baseHost((path, options) => {
+const defaultBaseHost = (path, options) => {
   const host = process.env.NODE_ENV === 'production' ? '117sport.net' : '117sport.org';
   const url = path.replace(/^\/\/([A-Z-_]{1,})/, (a, b) => {
     return `http://service-${b.toLowerCase()}.${host}`;
@@ -13,7 +13,7 @@ fetch.baseHost((path, options) => {
     return `${url}${url.match(/\?/) ? '&' : '?'}${stringify(options.query)}`;
   }
   return url;
-});
+};
 
 fetch.callback((response) => {
   const requestid = response.headers.get('x-system-requestid');
@@ -50,6 +50,8 @@ fetch.headers({
 });
 
 module.exports = (app) => (url, options = {}) => {
+  fetch.baseHost(app.config.baseHost || defaultBaseHost);
+
   if (!fetchLog) {
     fetchLog = app.logger.fetch;
   }

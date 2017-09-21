@@ -8,5 +8,4 @@ Server.Utils = {
   traceId: require('./libs/utils/trace')
 };
 
-
 module.exports = Server;
