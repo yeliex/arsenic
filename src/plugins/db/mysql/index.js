@@ -14,7 +14,7 @@ module.exports = (App, define) => {
   const config = App.config.plugins.mysql;
 
   if (typeof define !== 'function' || !config.enable) {
-    App.db = {};
+    App.db = App.db || {};
     return {};
   }
 

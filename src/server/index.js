@@ -166,6 +166,11 @@ class App {
   }
 
   //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
+  get mongo() {
+    return AppPrivate.mongo;
+  }
+
+  //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
   get redis() {
     return AppPrivate.redis;
   }
