@@ -59,6 +59,10 @@ class Context {
     return this.ctx.App.search;
   }
 
+  get mongo() {
+    return this.ctx.App.mongo;
+  }
+
   get cache() {
     return this.ctx.App.redis;
   }

@@ -4,7 +4,8 @@ const { statSync } = require('fs');
 const DBS = {
   mysql: require('./mysql'),
   elastic: require('./elastic'),
-  redis: require('./redis')
+  redis: require('./redis'),
+  mongo: require('./mongo')
 };
 
 const discoverDefine = (path) => {
