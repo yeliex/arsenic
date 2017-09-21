@@ -50,7 +50,9 @@ fetch.headers({
 });
 
 module.exports = (app) => (url, options = {}) => {
-  fetch.baseHost(app.config.baseHost || defaultBaseHost);
+  if (app.config.baseHost !== false) {
+    fetch.baseHost(app.config.baseHost || defaultBaseHost);
+  }
 
   if (!fetchLog) {
     fetchLog = app.logger.fetch;
