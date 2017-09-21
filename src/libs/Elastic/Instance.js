@@ -90,8 +90,8 @@ module.exports = (model) => {
 
   Instance.decorate = (doc) => {
     const current = new Date();
-    doc.utc_create = doc.utc_create || current;
-    doc.utc_modified = current;
+    doc.utcCreate = doc.utcCreate || current;
+    doc.utcModified = current;
 
     if (doc instanceof Instance) {
       delete doc.id;
