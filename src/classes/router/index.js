@@ -1,7 +1,7 @@
 const KoaRouter = require('koa-router');
 const { join } = require('path');
 
-module.exports = function Router({ prefix: routePrefix, ...options }) {
+module.exports = function Router({ prefix: routePrefix, ...options } = {}) {
   const that = new KoaRouter(options);
 
   that.prefix = routePrefix;
