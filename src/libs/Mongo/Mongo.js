@@ -20,7 +20,7 @@ class Mongo {
   }
 
   define(name) {
-    const url = `${this.$host.replace(/^mongodb:\/\//, 'mongodb://')}${this.$port ? `:${this.$port}` : ''}/${name}`;
+    const url = `${this.$host.replace(/^(mongodb:\/\/)?/, 'mongodb://')}${this.$port ? `:${this.$port}` : ''}/${name}`;
     this.$models[name] = MongoDB(url, this.$options);
   }
 
