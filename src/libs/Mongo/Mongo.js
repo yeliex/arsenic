@@ -28,3 +28,5 @@ class Mongo {
     return this.$models;
   }
 }
+
+module.exports = Mongo;
