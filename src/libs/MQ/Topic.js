@@ -21,7 +21,8 @@ class Topic {
         urllib
       });
 
-      this.Comsumer.subscribe(topicName, tags.join(' || '));
+      //this.Comsumer.subscribe(topicName, tags.join(' || '));
+      this.Comsumer.subscribe(topicName, '*');
 
       this.Comsumer.on('message', this.dispatch.bind(this));
 
