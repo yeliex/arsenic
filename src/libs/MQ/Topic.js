@@ -26,7 +26,7 @@ class Topic {
 
       this.Comsumer.on('message', this.dispatch.bind(this));
 
-      this.Comsumer.on('error', (err) => console.error(err.stack));
+      this.Comsumer.on('error', (err) => this.Logger.error(err.stack));
     }
 
     if (producer) {
@@ -41,12 +41,12 @@ class Topic {
   dispatchMsg(msg) {
     return Promise.resolve().then(() => {
       const message = new Message(msg);
-      this.Logger.info(`[mq:receive] ${message.toString()}`);
+      this.Logger.info(`[mq:receive] ${message.msgId} ${message.topic} ${message.tags} ${message.keys} ${message.toString()}`);
       const listener = this.Listeners[message.tag] || {};
       if (typeof listener.handler === 'function') {
         return listener.handler(message);
       }
-      console.warn(`[mq:client] no listener: ${message.tag}, [ACK]`);
+      this.Logger.warn(`[mq:client] no listener: ${message.tag}, [ACK]`);
       return true;
     });
   }
@@ -66,7 +66,7 @@ class Topic {
       if (!total.some(res => res !== true)) {
         ack();
       }
-      console.warn(`[mq:producer:response] ${msgs} ${total}`);
+      this.Logger.warn(`[mq:producer:response] ${JSON.stringify(msgs)} ${total}`);
     });
   }
 
@@ -75,7 +75,7 @@ class Topic {
     tags = typeof tags === 'string' ? tags.replace(/ /g, '').split('||') : tags;
     tags.forEach((tag) => {
       if (this.Listeners[tag]) {
-        console.error(`[mq: client] Duplicate listener: ${this.Topic}=>${tag}, ignore`);
+        this.Logger.error(`[mq: client] Duplicate listener: ${this.Topic}=>${tag}, ignore`);
       }
       this.Listeners[tag] = {
         handler: handler
