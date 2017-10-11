@@ -45,7 +45,8 @@ class Topic {
       if (typeof listener.handler === 'function') {
         return listener.handler(message);
       }
-      console.warn(`[mq:client] no listener: ${message.tag}`);
+      console.warn(`[mq:client] no listener: ${message.tag}, [ACK]`);
+      return true;
     });
   }
 
