@@ -24,8 +24,6 @@ const AppPrivate = {
   router
 };
 
-plugins.noBug();
-
 class App {
   constructor(option = {}) {
     this.listening = false;
@@ -37,6 +35,8 @@ class App {
     AppPrivate.app = new Koa();
 
     plugins.config(AppPrivate);
+
+    plugins.noBug(AppPrivate);
 
     plugins.error(AppPrivate);
 
@@ -51,6 +51,8 @@ class App {
 
     // 载入必要中间件
     AppPrivate.app.use(middlewares.healthCheck(this));
+
+    AppPrivate.app.use(middlewares.times.start);
 
     AppPrivate.app.use(AppPrivate.logger.accessMiddleware());
 
@@ -76,7 +78,7 @@ class App {
 
     AppPrivate.app.use(middlewares.headers(this));
 
-    plugins.fetch(AppPrivate);
+    AppPrivate.app.use(middlewares.fetch(this));
 
     // 全局挂载项目定制
     plugins.middleware(AppPrivate);

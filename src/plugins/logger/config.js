@@ -15,22 +15,28 @@ module.exports = {
       type: 'dateFile',
       pattern: '-yyyy-MM-dd'
     },
-    'app': {
+    app: {
       console: true,
       type: 'dateFile',
       pattern: '-yyyy-MM-dd'
     },
-    'error': {
+    error: {
       type: 'dateFile',
       pattern: '-yyyy-MM-dd',
       console: true
     },
-    'fetch': {
+    fetch: {
       type: 'dateFile',
       pattern: '-yyyy-MM-dd'
     },
-    'mq': {
+    mq: {
       type: 'dateFile',
+      pattern: '-yyyy-MM-dd'
+    },
+    // request log for ali logger
+    request: {
+      type: 'dateFile',
+      layout: { type: 'messagePassThrough' },
       pattern: '-yyyy-MM-dd'
     }
   }

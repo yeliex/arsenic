@@ -17,8 +17,7 @@
     "test",
     "package.json",
     "readme.md",
-    "yarn.lock",
-    "example"
+    "yarn.lock"
   ],
   "keywords": [
     "beesport",
@@ -46,6 +45,7 @@
     "mime-types": "^2.1.17",
     "minimist": "^1.2.0",
     "mysql": "^2.14.1",
+    "node.date-time": "^1.2.2",
     "node.mongo": "^3.1.5",
     "qs": "^6.5.0",
     "raven": "^2.1.1",

@@ -2,6 +2,8 @@
 
 const { STATUS_CODES } = require('http');
 const { Error: BaseError } = require('@bee/foundation');
+const AccessMiddleware = require('../access');
+const TimesMiddleware = require('../times');
 
 module.exports = (app) => {
   return async (ctx, next) => {
@@ -115,7 +117,7 @@ module.exports = (app) => {
         }
       }
 
-      ctx.status = response.code;
+      ctx.status = Number(response.code);
 
       response.data = {
         code: (response.data || {}).code || response.code,
@@ -142,9 +144,9 @@ module.exports = (app) => {
 
       ctx.body = response.data;
 
-      if (process.env.NODE_ENV !== 'test') {
-        app.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
-      }
+      TimesMiddleware.end(ctx);
+
+      AccessMiddleware(app)(ctx);
     };
 
     ctx.throwBody = (code, str) => {
@@ -155,10 +157,6 @@ module.exports = (app) => {
       str = typeof str === 'string' ? str : JSON.stringify(str);
       ctx.body = str;
       ctx.status = code;
-
-      if (process.env.NODE_ENV !== 'test') {
-        app.logger.accessApi[ctx.status < 400 ? 'info' : 'error'](`[${ctx.status}][${ctx.method.toUpperCase()}] ${ctx.originalUrl} ${ctx.body}`);
-      }
     };
 
     await next();

@@ -11,7 +11,7 @@ exports.plugins = {
     host: '192.168.1.117'
   },
   mq: {
-    enable: true,
+    enable: false,
     namesrvAddr: '192.168.1.161:9876'
   }
 };
