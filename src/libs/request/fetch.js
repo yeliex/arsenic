@@ -19,7 +19,7 @@ fetch.callback((response) => {
     }
 
     return {
-      data: (res.data || res.data === false) ? red.data : res,
+      data: (res.data || res.data === false) ? res.data : res,
       response
     };
   }).catch((e) => {
