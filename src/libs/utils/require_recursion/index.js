@@ -8,7 +8,7 @@ const recursion = ({ cwd } = {}) => {
   const items = fs.readdirSync(cwd).sort((a, b) => {
     return b === 'index.js';
   });
-  let total = {};
+  const total = {};
 
   items.forEach((item) => {
     const path = resolve(cwd, item);

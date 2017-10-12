@@ -44,17 +44,17 @@ module.exports = (app) => {
     const name = key.replace(/^config/, '').toLowerCase();
 
     switch (name) {
-      case 'prod': {
-        total['production'] = contexts[key];
-        break;
-      }
-      case 'dev': {
-        total['development'] = contexts[key];
-        break;
-      }
-      default: {
-        total[name] = contexts[key];
-      }
+    case 'prod': {
+      total['production'] = contexts[key];
+      break;
+    }
+    case 'dev': {
+      total['development'] = contexts[key];
+      break;
+    }
+    default: {
+      total[name] = contexts[key];
+    }
     }
 
     return total;
