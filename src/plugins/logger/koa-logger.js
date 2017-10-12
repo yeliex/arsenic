@@ -28,9 +28,10 @@ const createNoLogCondition = (nolog) => {
 
 const assembleTokens = (ctx, customTokens) => {
   const arrayUniqueTokens = function(array) {
-    let a = array.concat();
+    const a = array.concat();
     for (let i = 0; i < a.length; ++i) {
       for (let j = i + 1; j < a.length; ++j) {
+        // eslint-disable-next-line eqeqeq
         if (a[i].token == a[j].token) { // not === because token can be regexp object
           a.splice(j--, 1);
         }
@@ -52,7 +53,7 @@ const assembleTokens = (ctx, customTokens) => {
   defaultTokens.push({ token: ':referrer', replacement: ctx.headers.referer || '' });
   defaultTokens.push({
     token: ':http-version',
-    replacement: ctx.req.httpVersionMajor + '.' + ctx.req.httpVersionMinor
+    replacement: `${ctx.req.httpVersionMajor }.${ ctx.req.httpVersionMinor}`
   });
   defaultTokens.push({
     token: ':remote-addr',
