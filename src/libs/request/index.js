@@ -1,62 +1,30 @@
-const fetch = require('autofetch');
-const { stringify } = require('qs');
+const fetch = require('./fetch');
 
-let fetchLog = null;
+module.exports = (url, options = {}) => {
+  console.info(`[${options.method || 'GET'}] ${url} ${options.mock ? 'mock' : ''}`);
 
-const defaultBaseHost = (path, options) => {
-  const host = process.env.NODE_ENV === 'production' ? '117sport.net' : '117sport.org';
-  const url = path.replace(/^\/\/([A-Z-_]{1,})/, (a, b) => {
-    return `http://service-${b.toLowerCase()}.${host}`;
+  return fetch(url, options).then(({ data, response }) => {
+    const requestId = response.headers.get('x-system-requestid');
+
+    console.info(`[response][${response.status}] ${requestid || ''} ${response.url} ${JSON.stringify(data)}`);
+
+    return data;
+  }).catch(({ error, response }) => {
+    const requestId = response.headers.get('x-system-requestid');
+
+    console.error(`[response][${response.status}] ${requestId} ${response.url} ${typeof e === 'object' ? JSON.stringify(error) : error}`);
+
+    if (error.code === 'S0-000-00-0002') {
+      return Promise.reject(`系统错误: ${error.code}`);
+    }
+
+    if (response.status !== 200) {
+      return Promise.reject({
+        code: response.status,
+        msg: error.message || error.msg || error
+      });
+    }
+
+    return Promise.reject(error.message || error.msg || error);
   });
-
-  if (options.query) {
-    return `${url}${url.match(/\?/) ? '&' : '?'}${stringify(options.query)}`;
-  }
-  return url;
-};
-
-fetch.callback((response) => {
-  const requestid = response.headers.get('x-system-requestid');
-  return response.text().then((text) => {
-    try {
-      return JSON.parse(text);
-    } catch (e) {
-      return text;
-    }
-  }).then((data) => {
-    return response.ok ? data : Promise.reject(response.status === 500 ? data : {
-      code: response.status,
-      message: (data || {}).msg || (data || {}).message || data || response.statusText
-    });
-  }).then((res) => {
-    // ...log
-    if (res.code && String(res.code).match(/^[A-Z]/)) {
-      return Promise.reject(res.msg);
-    }
-
-    fetchLog.info(`[response][${response.status}] ${requestid} ${response.url} ${JSON.stringify(res)}`);
-    return res.data || res.data === false ? res.data : res;
-  }).catch((e) => {
-    fetchLog.error(`[response][${response.status}] ${requestid} ${response.url} ${typeof e === 'object' ? JSON.stringify(e) : e}`);
-    if (e.code === 'S0-000-00-0002') {
-      return Promise.reject(`系统错误: ${e.code}`);
-    }
-    return Promise.reject(e);
-  });
-});
-
-fetch.headers({
-  'User-Agent': 'node-fetch/1.0 autofetch/3 node beesport/3 like(BeeSport/3.0-660.1 (iPhone6; iOS/9.3))'
-});
-
-module.exports = (app) => (url, options = {}) => {
-  if (app.config.baseHost !== false && typeof fetch.baseHost === 'function') {
-    fetch.baseHost(app.config.baseHost || defaultBaseHost);
-  }
-
-  if (!fetchLog) {
-    fetchLog = app.logger.fetch;
-  }
-  fetchLog.info(`[${options.method || 'GET'}] ${url} ${options.mock ? 'mock' : ''}`);
-  return fetch(url, options);
 };

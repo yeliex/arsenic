@@ -3,6 +3,8 @@ const { resolve } = require('path');
 
 const comment = fs.readFileSync(resolve(__dirname, './comment'), 'utf8');
 
-module.exports = () => {
-  console.log(comment);
+module.exports = (app) => {
+  if (app.config.nobug) {
+    console.log(comment);
+  }
 };

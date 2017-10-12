@@ -11,19 +11,19 @@ module.exports = (App) => (error, ctx) => {
   if (error instanceof Error) {
     App.logger.error.error(error);
     const newError = new BaseError.Errors.UNKNOWN_ERROR();
-    newError.message = error.message;
+    newError.message = error.msg || error.message;
     ctx.throw(newError);
     return;
   }
 
-  if (!Number.isNaN(error.code) && error.code > 200 && error.code < 512) {
+  if (!Number.isNaN(error.code) && error.code >= 100 && error.code <= 511) {
     App.logger.error.error(JSON.stringify(error));
-    ctx.throw(error.code, error.message);
+    ctx.throw(error.code, error.msg || error.message);
     return;
   }
 
   App.logger.error.error(error);
   const newError = new BaseError.Errors.UNKNOWN_ERROR();
-  newError.message = error.message || error;
+  newError.message = error.message || error.msg || error;
   ctx.throw(newError);
 };

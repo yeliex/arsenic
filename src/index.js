@@ -8,4 +8,6 @@ Server.Utils = {
   traceId: require('./libs/utils/trace')
 };
 
+Server.fetch = require('./libs/request/index');
+
 module.exports = Server;

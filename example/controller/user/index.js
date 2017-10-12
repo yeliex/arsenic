@@ -1,12 +1,17 @@
 const Context = require('../../../src/classes/context/index');
 
 class User extends Context {
-  a() {
-    throw new this.Errors.TEST_ERROR();
-
-    return this.service.user.getUserList().then((res) => {
-      this.throw(200, res);
+  async a() {
+    const res = await this.fetch('//USER/users/:id', {
+      params: {
+        id: 1
+      },
+      query: {
+        id:123
+      }
     });
+
+    console.log(res);
   }
 
   b() {

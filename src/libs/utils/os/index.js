@@ -23,8 +23,10 @@ const padStr = (str, length) => {
   return str >= length ? str.substr(0, length) : str.padStart(length, '0');
 };
 
-exports.localIp = (() => {
-  return (((os.networkInterfaces().en0 || []).filter(({ family }) => family === 'IPv4')[0] || {}).address || '').split('.').map((str) => {
+exports.ip = ((os.networkInterfaces().en0 || []).filter(({ family }) => family === 'IPv4')[0] || {}).address || '';
+
+exports.ipInt16 = (() => {
+  return exports.ip.split('.').map((str) => {
     return padStr(Number(str, 10).toString(16), 2);
   }).join('');
 })();
@@ -34,5 +36,5 @@ exports.containerId = (() => {
   if (flags.isContainer) {
     return `0${padStr(process.env.HOSTNAME, 8)}${pid.padStart(2, '0')}`;
   }
-  return `1${exports.localIp}${pid.padStart(4, '0')}`;
+  return `1${exports.ipInt16}${pid.padStart(4, '0')}`;
 })();

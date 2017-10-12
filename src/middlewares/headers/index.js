@@ -1,12 +1,6 @@
 const { parse } = require('ua-parser');
 const { traceId } = require('../../libs/utils/trace/index');
 
-const spreadHeaders = [
-  'X-System-TraceId',
-  'X-System-RpcId',
-  'X-System-RequestID'
-];
-
 module.exports = (app) => async (ctx, next) => {
   const headers = {};
 
@@ -35,6 +29,8 @@ module.exports = (app) => async (ctx, next) => {
   headers['X-User-Password'] = ctx.get('X-User-Password') || app.config.X_USER_PASSWORD;
 
   ctx._HEADERS = new Headers(headers);
+
+  ctx.set('X-System-RequestId',`${headers['X-System-TraceId']}(${headers['X-System-RpcId']})`);
 
   await next(ctx);
 };
