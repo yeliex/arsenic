@@ -23,54 +23,54 @@ module.exports = (app) => {
       /**
          * ctx.throw();
          */
-      case 0: {
-        response.code = 404;
-        break;
-      }
-      /**
+        case 0: {
+          response.code = 404;
+          break;
+        }
+        /**
          * ctx.throw(403)
          * ctx.throw(new Error('invalid'))
          * ctx.throw('something exploded')
          * ctx.throw({code: 200, data: 'success'})
          */
-      case 1: {
-        if (!isNaN(Number(args[0]))) {
-          response.code = args[0];
-          break;
-        }
-        if (args[0] instanceof BaseError) {
-          response.code = 200;
-          response.data = {
-            code: args[0].codeString,
-            message: args[0].message
-          };
-          break;
-        }
-        if (args[0] instanceof Error) {
+        case 1: {
+          if (!isNaN(Number(args[0]))) {
+            response.code = args[0];
+            break;
+          }
+          if (args[0] instanceof BaseError) {
+            response.code = 200;
+            response.data = {
+              code: args[0].codeString,
+              message: args[0].message
+            };
+            break;
+          }
+          if (args[0] instanceof Error) {
+            response.code = 500;
+            response.data = {
+              code: args[0].code || args[0].number || 500,
+              message: args[0].message
+            };
+            break;
+          }
+          if (typeof args[0] === 'object') {
+            response.code = args[0].code || 500;
+            response.data = {
+              code: args[0].code || 500,
+              message: args[0].message,
+              data: args[0].data
+            };
+            break;
+          }
           response.code = 500;
           response.data = {
-            code: args[0].code || args[0].number || 500,
-            message: args[0].message
+            code: 500,
+            message: args[0]
           };
           break;
         }
-        if (typeof args[0] === 'object') {
-          response.code = args[0].code || 500;
-          response.data = {
-            code: args[0].code || 500,
-            message: args[0].message,
-            data: args[0].data
-          };
-          break;
-        }
-        response.code = 500;
-        response.data = {
-          code: 500,
-          message: args[0]
-        };
-        break;
-      }
-      /**
+        /**
          * args.length > 2, ignored
          * ctx.throw('name requires', 400);
          * ctx.throw(400, 'name required');
@@ -79,42 +79,42 @@ module.exports = (app) => {
          * ctx.throw(200, any)
          * ctx.throw(any, 200)
          */
-      case 2:
-      default: {
-        let code = 500;
-        let data = undefined;
-        if (!isNaN(Number(args[0]))) {
-          code = args[0];
-          data = args[1];
-        } else if (!isNaN(Number(args[1]))) {
-          code = args[1];
-          data = args[0];
-        } else {
+        case 2:
+        default: {
+          let code = 500;
+          let data = undefined;
+          if (!isNaN(Number(args[0]))) {
+            code = args[0];
+            data = args[1];
+          } else if (!isNaN(Number(args[1]))) {
+            code = args[1];
+            data = args[0];
+          } else {
           // if no code number, must be error
-          code = 500;
-          data = {
-            code: args[0],
-            message: args[1]
-          };
-        }
-        response.code = code;
-        if (data instanceof Error) {
-          response.data = {
-            code: data.code || data.number || response.code || 500,
-            message: data.message
-          };
-        } else {
-          response.data = Object.assign({
-            code
-          }, String(code) === '200' ? {
-            data
-          } : {
-            message: data
-          });
-        }
+            code = 500;
+            data = {
+              code: args[0],
+              message: args[1]
+            };
+          }
+          response.code = code;
+          if (data instanceof Error) {
+            response.data = {
+              code: data.code || data.number || response.code || 500,
+              message: data.message
+            };
+          } else {
+            response.data = Object.assign({
+              code
+            }, String(code) === '200' ? {
+              data
+            } : {
+              message: data
+            });
+          }
 
-        break;
-      }
+          break;
+        }
       }
 
       ctx.status = Number(response.code);
