@@ -72,6 +72,11 @@ Router.prototype.register = function(path, methods, middleware, opts = {}) {
 };
 
 Router.prototype.mount = function(prefix, opts, getController) {
+  if(opts && !getController && typeof opts === 'function'){
+    getController = opts;
+    opts = {};
+  }
+
   if (typeof getController !== 'function') {
     throw new Error(`getController must be function: ${prefix}`);
   }
