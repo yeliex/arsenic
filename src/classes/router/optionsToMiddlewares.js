@@ -14,5 +14,5 @@ module.exports = function optionsToMiddlewares(options) {
     }
 
     return middlewares;
-  }, options.auth ? [] : [authMiddleware()]);
+  }, options.auth === undefined ? [] : [authMiddleware()]);
 };
