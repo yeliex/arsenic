@@ -42,7 +42,7 @@ methods.forEach(function(method) {
 Router.prototype.register = function(path, methods, middleware, opts = {}) {
   if (Array.isArray(path)) {
     path.forEach(function(each) {
-      router.register.call(this, each, methods, middleware, opts);
+      this.register.call(this, each, methods, middleware, opts);
     });
 
     return this;
