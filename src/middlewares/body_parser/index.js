@@ -11,14 +11,14 @@ const extraParser = (app) => async (ctx, next) => {
     const contentType = ctx.request.type;
 
     switch (contentType) {
-    case 'text/xml': {
-      ctx._POST = await toJSON(ctx.request.body);
-      break;
-    }
-    default: {
-      ctx._POST = ctx.request.body;
-      break;
-    }
+      case 'text/xml': {
+        ctx._POST = await toJSON(ctx.request.body);
+        break;
+      }
+      default: {
+        ctx._POST = ctx.request.body;
+        break;
+      }
     }
   }
   if (ctx._POST) {

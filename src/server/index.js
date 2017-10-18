@@ -71,9 +71,7 @@ class App {
     AppPrivate.app.use(middlewares.response(this));
 
     AppPrivate.app.use(middlewares.cors(this));
-
-    AppPrivate.app.use(middlewares.auth(this));
-
+    
     AppPrivate.app.use(middlewares.bodyParser(this));
 
     AppPrivate.app.use(middlewares.headers(this));
