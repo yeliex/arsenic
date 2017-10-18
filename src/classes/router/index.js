@@ -41,7 +41,7 @@ methods.forEach(function(method) {
 
 Router.prototype.register = function(path, methods, middleware, opts = {}) {
   if (Array.isArray(path)) {
-    path.forEach(function(each) {
+    path.forEach((each) => {
       this.register.call(this, each, methods, middleware, opts);
     });
 
@@ -72,7 +72,7 @@ Router.prototype.register = function(path, methods, middleware, opts = {}) {
 };
 
 Router.prototype.mount = function(prefix, opts, getController) {
-  if(opts && !getController && typeof opts === 'function'){
+  if (opts && !getController && typeof opts === 'function') {
     getController = opts;
     opts = {};
   }
