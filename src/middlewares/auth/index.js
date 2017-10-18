@@ -25,7 +25,7 @@ module.exports = (auth) => async (ctx, next) => {
 
   const XUserPassword = ctx.get('x-user-password');
 
-  if (app.config.X_USER_PASSWORD && (XUserPassword !== app.config.X_USER_PASSWORD)) {
+  if (ctx.App.config.X_USER_PASSWORD && (XUserPassword !== ctx.App.config.X_USER_PASSWORD)) {
     ctx.throw(401);
     return;
   }

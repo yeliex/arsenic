@@ -123,4 +123,8 @@ Router.prototype.mount = function(prefix, opts, getController) {
   });
 };
 
-module.exports = Router;
+module.exports = function({ prefix, ...opts } = {}) {
+  const router = new Router(opts);
+  router.prefix = prefix;
+  return router;
+};
