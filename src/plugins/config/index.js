@@ -7,14 +7,14 @@ const extend = require('extend2');
 const args = Object.assign({}, minimist(process.argv), minimist(JSON.parse(process.env.npm_config_argv || '{}').original || ''));
 
 const env = (() => {
-  if (args.prod || args.production) {
-    return 'production';
-  }
   if (args.daily) {
     return 'daily';
   }
   if (args.dev || args.development) {
     return 'development';
+  }
+  if (args.prod || args.production || args.online) {
+    return 'production';
   }
   if (args.env) {
     return args.env;
@@ -44,17 +44,17 @@ module.exports = (app) => {
     const name = key.replace(/^config/, '').toLowerCase();
 
     switch (name) {
-    case 'prod': {
-      total['production'] = contexts[key];
-      break;
-    }
-    case 'dev': {
-      total['development'] = contexts[key];
-      break;
-    }
-    default: {
-      total[name] = contexts[key];
-    }
+      case 'prod': {
+        total['production'] = contexts[key];
+        break;
+      }
+      case 'dev': {
+        total['development'] = contexts[key];
+        break;
+      }
+      default: {
+        total[name] = contexts[key];
+      }
     }
 
     return total;
