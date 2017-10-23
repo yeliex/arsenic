@@ -5,7 +5,7 @@
  * @create: 2017/8/24 下午2:42
  */
 const Redis = require('redis');
-const { promisifyAll } = require('bluebird');
+const {promisifyAll} = require('bluebird');
 
 module.exports = (App, define) => {
   const config = App.config.plugins.redis;
@@ -18,6 +18,7 @@ module.exports = (App, define) => {
   const client = Redis.createClient({
     host: config.host,
     port: config.port,
+    db: config.db,
     password: config.auth || config.passwd || config.password
   });
 
