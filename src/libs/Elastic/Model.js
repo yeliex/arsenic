@@ -47,9 +47,8 @@ class Model {
 
   getQuery(query) {
     const page = query.page ? {
-      size: query.page.pageSize || 20,
+      size: query.page.size || 20,
       from: query.page.size * query.page.page
-
     } : {};
 
     return {
