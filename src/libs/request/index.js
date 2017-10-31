@@ -6,7 +6,7 @@ module.exports = (url, options = {}) => {
   return fetch(url, options).then(({ data, response }) => {
     const requestId = response.headers.get('x-system-requestid');
 
-    console.info(`[response][${response.status}] ${requestid || ''} ${response.url} ${JSON.stringify(data)}`);
+    console.info(`[response][${response.status}] ${requestId || ''} ${response.url} ${JSON.stringify(data)}`);
 
     return data;
   }).catch(({ error, response }) => {
