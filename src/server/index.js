@@ -71,7 +71,7 @@ class App {
     AppPrivate.app.use(middlewares.response(this));
 
     AppPrivate.app.use(middlewares.cors(this));
-    
+
     AppPrivate.app.use(middlewares.bodyParser(this));
 
     AppPrivate.app.use(middlewares.headers(this));
@@ -86,6 +86,7 @@ class App {
     plugins.router(AppPrivate);
 
     plugins.mq(AppPrivate);
+    plugins.fetch(AppPrivate);
   }
 
   get load() {

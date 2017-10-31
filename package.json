@@ -67,6 +67,6 @@
     "lint"
   ],
   "peerDependencies": {
-    "@bee/foundation": "^1.3.2"
+    "@bee/foundation": "^1.3.3"
   }
 }
