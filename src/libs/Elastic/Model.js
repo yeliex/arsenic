@@ -46,17 +46,10 @@ class Model {
   }
 
   getQuery(query) {
-    const page = query.page ? {
-      size: query.page.size || 20,
-      from: query.page.size * query.page.page
-    } : {};
-
-    return {
+    const q = {
       ...this.indexType,
       refresh: query.fresh,
       body: {
-        size: page.size || query.size || 10000,
-        from: page.from || query.from,
         query: query.where,
         sort: query.sort,
         script: query.script,
@@ -65,6 +58,19 @@ class Model {
         aggs: query.aggs
       }
     };
+
+    if (query.page === false) {
+      return q;
+    }
+
+    const page = query.page ? {
+      size: query.page.size || 20,
+      from: query.page.size * query.page.page
+    } : {};
+
+    q.body.size = page.size || query.size || 10000;
+    q.body.from = page.from || query.from;
+    return q;
   }
 
   /**
@@ -98,6 +104,7 @@ class Model {
    * @returns {Promise.<number>}
    */
   count(query) {
+    query.page = false;
     return this.client.count(this.getQuery(query)).then((res) => res.count);
   }
 
