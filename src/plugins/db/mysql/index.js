@@ -30,6 +30,7 @@ module.exports = (App, define) => {
     host: host,
     port: port,
     dialect: 'mysql',
+    dialectOptions: config.options || {},
     typeValidation: true,
     benchmark: true,
     define: {
