@@ -76,23 +76,23 @@ class Context {
   }
 
   get user() {
-    return this.ctx._USER;
+    return this.ctx._USER || {};
   }
 
   get headers() {
-    return this.ctx._HEADERS;
+    return this.ctx._HEADERS || {};
   }
 
   get query() {
-    return this.ctx._GET;
+    return this.ctx._GET || {};
   }
 
   get body() {
-    return this.ctx._POST;
+    return this.ctx._POST || {};
   }
 
   get params() {
-    return this.ctx.params;
+    return this.ctx.params || {};
   }
 }
 

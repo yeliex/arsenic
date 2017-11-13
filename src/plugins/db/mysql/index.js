@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize');
 const { resolve } = require('path');
+const extend = require('./extend');
+const { discoverDefine } = require('../index');
+const fundation = require('./public');
+
 const _ = {
   camelCase: require('lodash/camelCase')
 };
-
-const { discoverDefine } = require('../index');
-
-const fundation = require('./public');
 
 const dbs = {};
 
@@ -58,7 +58,7 @@ module.exports = (App, define) => {
     if (dbs[name]) {
       throw new Error(`duplicate model name ${key}`);
     }
-    dbs[name] = models[key];
+    dbs[name] = extend.extendModel(models[key]);
   });
 
   sequelize.sync({ force: false }).then(() => {
