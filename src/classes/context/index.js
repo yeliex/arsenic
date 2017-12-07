@@ -48,7 +48,7 @@ class Context {
   }
 
   get config() {
-    return this.ctx.App.config;
+    return this.ctx.config || this.ctx.App.config;
   }
 
   get db() {
