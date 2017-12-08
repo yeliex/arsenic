@@ -7,7 +7,7 @@ const Message = require('./Message');
 
 class Topic {
   constructor(topic, config) {
-    const { topic: topicName, consumer, producer, tags } = topic;
+    const {topic: topicName, consumer, producer, tags} = topic;
 
     this.Tags = tags;
     this.Topic = topicName;
@@ -22,11 +22,7 @@ class Topic {
       });
 
       //this.Comsumer.subscribe(topicName, tags.join(' || '));
-      this.Comsumer.subscribe(topicName, '*');
 
-      this.Comsumer.on('message', this.dispatch.bind(this));
-
-      this.Comsumer.on('error', (err) => this.Logger.error(err.stack));
     }
 
     if (producer) {
@@ -35,6 +31,15 @@ class Topic {
         producerGroup: config.debug ? `${producer}_${user}` : producer,
         urllib
       });
+    }
+  }
+
+  startListen() {
+    if (this.Comsumer && !this.isListen) {
+      this.Comsumer.subscribe(this.Topic, '*');
+      this.Comsumer.on('message', this.dispatch.bind(this));
+      this.Comsumer.on('error', (err) => this.Logger.error(err.stack));
+      this.isListen = true;
     }
   }
 
@@ -72,6 +77,7 @@ class Topic {
 
   listen(tags, handler) {
     assert(typeof handler === 'function', 'listener handler must be function');
+    assert(this.isListen !== true, 'isListen cant add listener');
     tags = typeof tags === 'string' ? tags.replace(/ /g, '').split('||') : tags;
     tags.forEach((tag) => {
       if (this.Listeners[tag]) {
@@ -89,7 +95,7 @@ class Topic {
       const message = new RocketMQ.Message(this.Topic, tag, body);
 
       const send = this.Producer.send.bind(this.Producer);
-      co(function* () {
+      co(function*() {
         try {
           const res = yield send(message);
           rec(res);
