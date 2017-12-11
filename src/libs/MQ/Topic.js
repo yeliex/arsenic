@@ -2,6 +2,7 @@ const RocketMQ = require('rocketmq');
 const urllib = require('urllib');
 const assert = require('assert');
 const co = require('co');
+const httpclient = require('http');
 const user = require('os').userInfo().username;
 const Message = require('./Message');
 
@@ -18,7 +19,8 @@ class Topic {
       this.Comsumer = new RocketMQ.Consumer({
         ...config,
         consumerGroup: config.debug ? `${consumer}_${user}` : consumer,
-        urllib
+        urllib,
+        httpclient
       });
 
       //this.Comsumer.subscribe(topicName, tags.join(' || '));
@@ -29,15 +31,27 @@ class Topic {
       this.Producer = new RocketMQ.Producer({
         ...config,
         producerGroup: config.debug ? `${producer}_${user}` : producer,
-        urllib
+        urllib,
+        httpclient
       });
     }
   }
 
   startListen() {
     if (this.Comsumer && !this.isListen) {
-      this.Comsumer.subscribe(this.Topic, '*');
-      this.Comsumer.on('message', this.dispatch.bind(this));
+      const self = this;
+      this.Comsumer.subscribe(this.Topic, '*', function*(msg) {
+        return new Promise((rec, rej) => {
+          self.dispatch(msg, (error) => {
+            if (error) {
+              rej(error);
+              throw error;
+            } else {
+              rec();
+            }
+          });
+        });
+      });
       this.Comsumer.on('error', (err) => this.Logger.error(err.stack));
       this.isListen = true;
     }
@@ -70,6 +84,8 @@ class Topic {
     promise.then((total) => {
       if (!total.some(res => res !== true)) {
         ack();
+      } else {
+        ack(new Error('some handler error'));
       }
       this.Logger.warn(`[mq:producer:response] ${JSON.stringify(msgs)} ${total}`);
     });
