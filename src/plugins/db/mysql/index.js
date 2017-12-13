@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
-const { resolve } = require('path');
+const {resolve} = require('path');
 const _ = {
   camelCase: require('lodash/camelCase')
 };
 
-const { discoverDefine } = require('../index');
+const {discoverDefine} = require('../index');
 
 const fundation = require('./public');
 
@@ -18,9 +18,9 @@ module.exports = (App, define) => {
     return {};
   }
 
-  const { db: name, host = 'localhost', port = 3306, user, passwd } = config;
+  const {db: name, host = 'localhost', port = 3306, user, passwd} = config;
 
-  Object.keys({ db: name, user, passwd }).forEach((k) => {
+  Object.keys({db: name, user, passwd}).forEach((k) => {
     if (!config[k]) {
       throw new Error(`${k} cannot be undefined`);
     }
@@ -36,7 +36,8 @@ module.exports = (App, define) => {
     define: {
       underscored: true,
       underscoredAll: true
-    }
+    },
+    ...config.dbOptions,
   });
 
   sequelize.authenticate().then(() => {
@@ -62,7 +63,7 @@ module.exports = (App, define) => {
     dbs[name] = models[key];
   });
 
-  sequelize.sync({ force: false }).then(() => {
+  sequelize.sync({force: false}).then(() => {
     console.info(`sync mysql db: ${name} success`);
   }).catch((e) => {
     console.error(`sync mysql db: ${name} failed, ${e}`);
