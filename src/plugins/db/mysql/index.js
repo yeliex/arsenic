@@ -37,7 +37,7 @@ module.exports = (App, define) => {
       underscored: true,
       underscoredAll: true
     },
-    ...config.dbOptions,
+    ...config.dbOptions
   });
 
   sequelize.authenticate().then(() => {
