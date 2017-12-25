@@ -68,6 +68,8 @@ module.exports = (App, define) => {
     console.error(`sync mysql db: ${name} failed, ${e}`);
   });
 
+  App.sequelize = sequelize;
+
   App.db = dbs;
 
   return dbs;
