@@ -161,6 +161,11 @@ class App {
     return AppPrivate.db;
   }
 
+  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  get sequelize() {
+    return AppPrivate.sequelize;
+  }
+
   //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
   get search() {
     return AppPrivate.search;
