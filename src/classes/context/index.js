@@ -55,6 +55,10 @@ class Context {
     return this.ctx.App.db;
   }
 
+  get sequelize() {
+    return this.ctx.App.sequelize;
+  }
+
   get search() {
     return this.ctx.App.search;
   }
