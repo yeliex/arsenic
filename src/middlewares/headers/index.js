@@ -30,7 +30,7 @@ module.exports = (app) => async (ctx, next) => {
 
   ctx._HEADERS = new Headers(headers);
 
-  ctx.set('X-System-RequestId',`${headers['X-System-TraceId']}(${headers['X-System-RpcId']})`);
+  ctx.set('X-System-RequestId', `${headers['X-System-TraceId']}(${headers['X-System-RpcId']})`);
 
   await next(ctx);
 };
