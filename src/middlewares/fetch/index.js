@@ -65,7 +65,7 @@ module.exports = (app) => {
     const rpcId = ctx._HEADERS.get('X-System-RpcId');
 
     ctx.fetch = (url, options = {}) => {
-      app.logger.fetch.info(`[${options.method || 'GET'}] ${url} ${options.mock ? 'mock' : ''}`);
+      app.logger.fetch.info(`[${options.method || 'GET'}] ${url} ${JSON.stringify(options)}`);
 
       options.headers = {
         ...headers,
