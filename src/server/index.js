@@ -106,92 +106,92 @@ class App {
     };
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get config() {
     return AppPrivate.config;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get option() {
     return AppPrivate.option;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get plugin() {
     return AppPrivate.plugin;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get middleware() {
     return AppPrivate.middleware;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get service() {
     return AppPrivate.service;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get controller() {
     return AppPrivate.controller;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get Error() {
     return AppPrivate.Error;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get Errors() {
     return AppPrivate.Errors;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get logger() {
     return AppPrivate.logger;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get fetch() {
     return AppPrivate.fetch;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get db() {
     return AppPrivate.db;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get sequelize() {
     return AppPrivate.sequelize;
   }
 
-  //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
+  // noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
   get search() {
     return AppPrivate.search;
   }
 
-  //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
+  // noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
   get mongo() {
     return AppPrivate.mongo;
   }
 
-  //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
+  // noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
   get redis() {
     return AppPrivate.redis;
   }
 
-  //noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
+  // noinspection JSMethodCanBeStatic,JSUnusedGlobalSymbols
   get mq() {
     return AppPrivate.mq;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get router() {
     return AppPrivate.router;
   }
 
-  //noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
+  // noinspection JSMethodCanBeStatic,JSMethodCanBeStatic
   get app() {
     return AppPrivate.app;
   }

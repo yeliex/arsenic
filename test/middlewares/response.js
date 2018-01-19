@@ -33,11 +33,11 @@ class Context {
     this.ctx.body = data;
   }
 
-  get (key) {
+  get(key) {
     return this.ctx.headers[key.toLowerCase()];
   }
 
-  set (key, value) {
+  set(key, value) {
     this.ctx.headers[key.toLowerCase()] = value;
   }
 }

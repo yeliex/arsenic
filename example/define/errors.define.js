@@ -8,4 +8,4 @@ const { Error } = require('@bee/foundation');
 
 const Template = new Error.ErrorTemplate(Error.SeriesTypes.NODE_MESSAGE);
 
-exports.TEST_ERROR = new Template(1000,'商家不存在');
+exports.TEST_ERROR = new Template(1000, '商家不存在');

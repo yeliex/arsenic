@@ -9,7 +9,7 @@ module.exports = (app) => {
   return async (ctx, next) => {
     const userAgent = process.env.NODE_ENV === 'test' ? '' : ctx.get('user-agent');
 
-    //noinspection JSCommentMatchesSignature
+    // noinspection JSCommentMatchesSignature
     ctx.throw = (...args) => {
       const response = {
         code: 404,
@@ -20,7 +20,7 @@ module.exports = (app) => {
       opts.json = opts.json !== false;
 
       switch (Number(args.length)) {
-      /**
+        /**
          * ctx.throw();
          */
         case 0: {
@@ -90,7 +90,7 @@ module.exports = (app) => {
             code = args[1];
             data = args[0];
           } else {
-          // if no code number, must be error
+            // if no code number, must be error
             code = 500;
             data = {
               code: args[0],

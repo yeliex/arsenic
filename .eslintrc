@@ -26,6 +26,7 @@
     "no-param-reassign": [0],
     "no-plusplus": [0],
     "no-var": ["error"],
+    "object-curly-spacing": ["error", "always", {"arraysInObjects": true}],
     "prefer-const": ["error"],
     "prefer-template": ["error"],
     "no-duplicate-imports": ["error"],
@@ -51,6 +52,7 @@
       "flatTernaryExpressions": false,
       "ignoredNodes": ["JSXElement", "JSXElement *"]
     }],
-    "newline-per-chained-call": [0]
+    "newline-per-chained-call": [0],
+    "spaced-comment": ["error", "always"]
   }
 }

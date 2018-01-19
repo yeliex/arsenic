@@ -1,6 +1,6 @@
 const authMiddleware = require('../../middlewares/auth');
 
-module.exports = function optionsToMiddlewares(options) {
+module.exports = function optionsToMiddlewares(options, b) {
   return Object.keys(options).reduce((middlewares, option) => {
     switch (option) {
       case 'auth': {
