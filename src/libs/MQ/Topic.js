@@ -38,7 +38,7 @@ class Topic {
     if (this.Comsumer && !this.isListen) {
       const avaliableTags = Object.keys(this.Listeners);
 
-      this.Comsumer.subscribe(this.Topic, avaliableTags.join('||'), this.dispatch);
+      this.Comsumer.subscribe(this.Topic, avaliableTags.join('||'), this.dispatch.bind(this));
       this.Comsumer.on('error', (err) => this.Logger.error(err.stack));
       this.isListen = true;
     }
@@ -67,7 +67,8 @@ class Topic {
       this.Logger.warn(`[mq:producer:response][RESOLVED] ${JSON.stringify(msg)}`);
       return res;
     }).catch((e) => {
-      this.Logger.warn(`[mq:producer:response][REJECTED] ${JSON.stringify(msg)}`);
+      const error = e instanceof Error ? e : new Error(e.message || (typeof e === 'object' ? JSON.stringify(e) : e));
+      this.Logger.warn(`[mq:producer:response][REJECTED] ${JSON.stringify(e.message)}`);
       return Promise.reject(e);
     });
   }
