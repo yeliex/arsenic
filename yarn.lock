@@ -2404,9 +2404,9 @@ rimraf@2, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.6.1:
   dependencies:
     glob "^7.0.5"
 
-rocketmq@^2.0.0:
-  version "2.0.0"
-  resolved "http://registry.npm.taobao.org/rocketmq/download/rocketmq-2.0.0.tgz#692363292298d80675c06841f106629bce5ebc69"
+rocketmq@^2.0.1:
+  version "2.0.1"
+  resolved "http://registry.npm.taobao.org/rocketmq/download/rocketmq-2.0.1.tgz#8da725b0f479918398da24e55ab63bd2dc723d4d"
   dependencies:
     JSON2 "^0.1.0"
     address "^1.0.3"
