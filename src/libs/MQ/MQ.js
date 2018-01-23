@@ -1,5 +1,4 @@
 const { Consumer, Producer } = require('rocketmq');
-const urllib = require('urllib');
 const _ = require('lodash');
 const Topic = require('./Topic');
 

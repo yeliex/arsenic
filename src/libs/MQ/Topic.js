@@ -8,7 +8,7 @@ const Message = require('./Message');
 
 class Topic {
   constructor(topic, config) {
-    const {topic: topicName, consumer, producer, tags} = topic;
+    const { topic: topicName, consumer, producer, tags } = topic;
 
     this.Tags = tags;
     this.Topic = topicName;
@@ -22,9 +22,6 @@ class Topic {
         urllib,
         httpclient
       });
-
-      //this.Comsumer.subscribe(topicName, tags.join(' || '));
-
     }
 
     if (producer) {
@@ -39,55 +36,39 @@ class Topic {
 
   startListen() {
     if (this.Comsumer && !this.isListen) {
-      const self = this;
-      this.Comsumer.subscribe(this.Topic, '*', function*(msg) {
-        return new Promise((rec, rej) => {
-          self.dispatch(msg, (error) => {
-            if (error) {
-              rej(error);
-              throw error;
-            } else {
-              rec();
-            }
-          });
-        });
-      });
+      const avaliableTags = Object.keys(this.Listeners);
+
+      this.Comsumer.subscribe(this.Topic, avaliableTags.join('||'), this.dispatch);
       this.Comsumer.on('error', (err) => this.Logger.error(err.stack));
       this.isListen = true;
     }
   }
 
-  dispatchMsg(msg) {
-    return Promise.resolve().then(() => {
-      const message = new Message(msg);
-      this.Logger.info(`[mq:receive] ${message.msgId} ${message.topic} ${message.tags} ${message.keys} ${message.toString()}`);
-      const listener = this.Listeners[message.tag] || {};
-      if (typeof listener.handler === 'function') {
-        return listener.handler(message);
-      }
-      this.Logger.warn(`[mq:client] no listener: ${message.tag}, [ACK]`);
-      return true;
-    });
+  start() {
+    return this.startListen();
   }
 
-  dispatch(msgs, ack) {
-    msgs = msgs instanceof Array ? msgs : [msgs];
-    let promise = Promise.resolve([]);
-    msgs.forEach((msg) => {
-      promise = promise.then((total = []) => {
-        return this.dispatchMsg(msg).then((res) => {
-          total.push(res);
-          return total;
-        });
-      });
-    });
-    promise.then((total) => {
-      if (!total.some(res => res !== true)) {
-        ack();
-      } else {
-        ack(new Error('some handler error'));
-      }
-      this.Logger.warn(`[mq:producer:response] ${JSON.stringify(msgs)} ${total}`);
+  dispatchMsg(msg) {
+    const message = new Message(msg);
+    this.Logger.info(`[mq:receive] ${message.msgId} ${message.topic} ${message.tags} ${message.keys} ${message.toString()}`);
+
+    const listener = this.Listeners[message.tag] || {};
+
+    if (typeof listener.handler === 'function') {
+      return listener.handler(message);
+    }
+
+    this.Logger.warn(`[mq:client] no listener: ${message.tag}, [ACK]`);
+    return Promise.resolve();
+  }
+
+  dispatch(msg) {
+    return this.dispatchMsg(msg).then((res) => {
+      this.Logger.warn(`[mq:producer:response][RESOLVED] ${JSON.stringify(msg)}`);
+      return res;
+    }).catch((e) => {
+      this.Logger.warn(`[mq:producer:response][REJECTED] ${JSON.stringify(msg)}`);
+      return Promise.reject(e);
     });
   }
 
@@ -111,7 +92,7 @@ class Topic {
       const message = new RocketMQ.Message(this.Topic, tag, body);
 
       const send = this.Producer.send.bind(this.Producer);
-      co(function*() {
+      co(function* () {
         try {
           const res = yield send(message);
           rec(res);
