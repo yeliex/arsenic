@@ -62,7 +62,7 @@ class Topic {
     return Promise.resolve();
   }
 
-  dispatch(msg) {
+  * dispatch(msg) {
     return this.dispatchMsg(msg).then((res) => {
       this.Logger.warn(`[mq:producer:response][RESOLVED] ${JSON.stringify(msg)}`);
       return res;
