@@ -51,7 +51,7 @@
     "qs": "^6.5.0",
     "raven": "^2.1.1",
     "redis": "^2.8.0",
-    "sequelize": "3",
+    "sequelize": "^4.37.8",
     "ua-parser": "^0.3.5",
     "urllib": "^2.24.0",
     "xml2js": "^0.4.19"
@@ -60,7 +60,7 @@
     "@bee/foundation": "^2.0.0",
     "chai": "^4.1.1",
     "eslint": "^4.8.0",
-    "mocha": "^3.5.0",
+    "mocha": "^5.2.0",
     "pre-commit": "^1.2.2",
     "rocketmq": "^2.0.0"
   },
