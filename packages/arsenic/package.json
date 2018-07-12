@@ -1,6 +1,6 @@
 {
   "name": "@yeliex/arsenic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "arsenic--a nodejs framework",
   "main": "src/index.js",
   "scripts": {},
@@ -26,7 +26,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@yeliex/arsenic-foundation": "^1.0.0",
+    "@yeliex/arsenic-foundation": "^1.0.1",
     "autofetch": "^4.1.0",
     "bluebird": "^3.5.0",
     "extend2": "^1.0.0",

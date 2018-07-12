@@ -1,6 +1,6 @@
 {
   "name": "@yeliex/arsenic-foundation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "arsenic node foundations",
   "main": "lib/index.js",
   "files": [
