@@ -1,0 +1,55 @@
+{
+  "name": "@yeliex/arsenic",
+  "version": "1.0.0",
+  "description": "arsenic--a nodejs framework",
+  "main": "src/index.js",
+  "scripts": {},
+  "files": [
+    "src",
+    "test",
+    "package.json",
+    "readme.md",
+    "yarn.lock"
+  ],
+  "keywords": [
+    "node",
+    "fundations"
+  ],
+  "author": "yeliex",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yeliex/arsenic.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "autofetch": "^4.1.0",
+    "bluebird": "^3.5.0",
+    "extend2": "^1.0.0",
+    "glob": "^7.1.2",
+    "inflection": "^1.12.0",
+    "is-generator-function": "^1.0.6",
+    "koa": "^2.3.0",
+    "koa-better-body": "^3.0.4",
+    "koa-compose": "^4.0.0",
+    "koa-convert": "^1.2.0",
+    "koa-mount": "^3.0.0",
+    "koa-response": "^2.1.0",
+    "koa-router": "^7.2.1",
+    "lodash": "^4.17.4",
+    "log4js": "^2.3.3",
+    "methods": "^1.1.2",
+    "mime-types": "^2.1.17",
+    "minimist": "^1.2.0",
+    "mysql": "^2.14.1",
+    "node.date-time": "^1.2.2",
+    "node.mongo": "^3.1.5",
+    "qs": "^6.5.0",
+    "raven": "^2.1.1",
+    "redis": "^2.8.0",
+    "rocketmq": "^2.0.1",
+    "sequelize": "3",
+    "ua-parser": "^0.3.5",
+    "urllib": "^2.24.0",
+    "xml2js": "^0.4.19"
+  }
+}

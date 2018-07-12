@@ -1,73 +1,34 @@
 {
-  "name": "@bee/arsenic",
-  "version": "2.4.0",
-  "description": "beesport node base server",
+  "name": "arsenic",
+  "version": "1.0.0",
+  "private": true,
+  "description": "arsenic--a nodejs framework",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint --fix ./",
-    "mocha": "mocha $(find test -name '*.js')",
+    "mocha": "mocha $(find packages/*/test -name '*.js')",
     "test": "npm run lint &&NODE_ENV=test npm run mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.117sport.com:packages/arsenic.git"
+    "url": "git@github.com:yeliex/arsenic.git"
   },
-  "files": [
-    "src",
-    "test",
-    "package.json",
-    "readme.md",
-    "yarn.lock"
-  ],
+  "files": [],
   "keywords": [
-    "beesport",
     "node",
     "fundations"
   ],
   "author": "yeliex",
-  "license": "UNLICENSED",
-  "dependencies": {
-    "autofetch": "^4.1.0",
-    "bluebird": "^3.5.0",
-    "extend2": "^1.0.0",
-    "glob": "^7.1.2",
-    "inflection": "^1.12.0",
-    "is-generator-function": "^1.0.6",
-    "koa": "^2.3.0",
-    "koa-better-body": "^3.0.4",
-    "koa-compose": "^4.0.0",
-    "koa-convert": "^1.2.0",
-    "koa-mount": "^3.0.0",
-    "koa-response": "^2.1.0",
-    "koa-router": "^7.2.1",
-    "lodash": "^4.17.4",
-    "log4js": "^2.3.3",
-    "methods": "^1.1.2",
-    "mime-types": "^2.1.17",
-    "minimist": "^1.2.0",
-    "mysql": "^2.14.1",
-    "node.date-time": "^1.2.2",
-    "node.mongo": "^3.1.5",
-    "qs": "^6.5.0",
-    "raven": "^2.1.1",
-    "redis": "^2.8.0",
-    "sequelize": "3",
-    "ua-parser": "^0.3.5",
-    "urllib": "^2.24.0",
-    "xml2js": "^0.4.19"
-  },
+  "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
-    "@bee/foundation": "^2.0.0",
     "chai": "^4.1.1",
     "eslint": "^4.8.0",
+    "lerna": "^2.11.0",
     "mocha": "^3.5.0",
-    "pre-commit": "^1.2.2",
-    "rocketmq": "^2.0.0"
+    "pre-commit": "^1.2.2"
   },
   "pre-commit": [
     "lint"
-  ],
-  "peerDependencies": {
-    "@bee/foundation": "^2.0.0"
-  }
+  ]
 }
