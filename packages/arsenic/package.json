@@ -21,6 +21,7 @@
     "url": "git@github.com:yeliex/arsenic.git"
   },
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org"
   },
   "license": "MIT",
