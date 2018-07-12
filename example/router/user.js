@@ -1,4 +1,4 @@
-const Router = require('../../src').Router;
+const { Router } = require('@yeliex/arsenic');
 
 const router = new Router({
   prefix: '/api'

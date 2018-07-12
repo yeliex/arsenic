@@ -1,4 +1,4 @@
-const Context = require('../../../../src/classes/context/index');
+const { Context } = require('@yeliex/arsenic');
 
 class User extends Context {
   a() {

@@ -11,3 +11,6 @@ package-lock.json
 dist/
 assets/build
 example/logs
+lib/
+dist/
+yarn-error.log

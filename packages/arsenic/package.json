@@ -22,6 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@yeliex/arsenic-foundation": "^1.0.0",
     "autofetch": "^4.1.0",
     "bluebird": "^3.5.0",
     "extend2": "^1.0.0",

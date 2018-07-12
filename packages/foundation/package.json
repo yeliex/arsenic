@@ -1,0 +1,44 @@
+{
+  "name": "@yeliex/arsenic-foundation",
+  "version": "1.0.0",
+  "description": "arsenic node foundations",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src",
+    "package.json",
+    "yarn.lock",
+    "readme.md"
+  ],
+  "scripts": {
+    "prebuild": "rm -rf lib/",
+    "build": "babel src -d ./lib --source-maps",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yeliex/arsenic.git"
+  },
+  "keywords": [
+    "node",
+    "foundations"
+  ],
+  "author": "yeliex",
+  "license": "MIT",
+  "dependencies": {
+    "co": "^4.6.0",
+    "elasticsearch": "^13.3.1",
+    "lodash": "^4.17.4",
+    "node.mongo": "^3.1.5",
+    "rocketmq": "^2.0.1",
+    "urllib": "^2.29.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-private-properties": "^1.0.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-0": "^6.24.1"
+  }
+}

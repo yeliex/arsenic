@@ -19,7 +19,7 @@
     "no-loop-func": ["error"],
     "no-multi-spaces": ["error"],
     "no-multiple-empty-lines": ["error", { "max": 1 }],
-    "no-underscore-dangle": ["error", { "allow": ["_", "_GET", "_POST", "_ID", "_ERROR", "_USER", "_HEADERS"] }],
+    "no-underscore-dangle": ["error", { "allow": ["_", "_GET", "_POST", "_ID", "_ERROR", "_USER", "_HEADERS", "_raw"] }],
     "no-unused-expressions": [0, { "allowTernary": true }],
     "no-new-wrappers": ["error"],
     "no-nested-ternary": [0],

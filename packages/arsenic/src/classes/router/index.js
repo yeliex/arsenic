@@ -2,7 +2,6 @@ const Router = require('koa-router');
 const Layer = require('koa-router/lib/layer');
 const methods = require('methods');
 const { join } = require('path');
-const compose = require('koa-compose');
 const optionsToMiddlewares = require('./optionsToMiddlewares');
 
 /**

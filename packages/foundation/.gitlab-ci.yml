@@ -1,8 +1,4 @@
-before_script:
-  - export NVM_DIR="$HOME/.nvm"
-  - \. "$NVM_DIR/nvm.sh"
-  - nvm install stable
-  - nvm use stable
+image: node:latest
 
 cache:
   paths:

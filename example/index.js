@@ -1,4 +1,4 @@
-const App = require('../src');
+const App = require('@yeliex/arsenic');
 
 const app = new App({
   cwd: process.cwd()

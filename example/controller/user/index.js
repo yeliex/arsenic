@@ -1,4 +1,4 @@
-const Context = require('../../../src/classes/context/index');
+const { Context } = require('@yeliex/arsenic');
 
 class User extends Context {
   async a() {
@@ -7,7 +7,7 @@ class User extends Context {
         id: 1
       },
       query: {
-        id:123
+        id: 123
       }
     });
 
