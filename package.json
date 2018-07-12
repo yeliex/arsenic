@@ -1,6 +1,6 @@
 {
-  "name": "@bee/foundation",
-  "version": "2.0.1",
+  "name": "@yeliex/foundation",
+  "version": "1.0.1",
   "description": "beesport node foundations",
   "main": "lib/index.js",
   "files": [
@@ -20,10 +20,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.117sport.com:server/node-fundations.git"
+    "url": "git@github.com:yeliex/arsenic-fundations.git"
   },
   "keywords": [
-    "beesport",
     "node",
     "foundations"
   ],
