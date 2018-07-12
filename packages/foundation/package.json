@@ -19,6 +19,9 @@
     "type": "git",
     "url": "git@github.com:yeliex/arsenic.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "keywords": [
     "node",
     "foundations"

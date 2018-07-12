@@ -20,6 +20,9 @@
     "type": "git",
     "url": "git@github.com:yeliex/arsenic.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "license": "MIT",
   "dependencies": {
     "@yeliex/arsenic-foundation": "^1.0.0",
