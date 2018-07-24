@@ -11,7 +11,8 @@
     "readme.md"
   ],
   "scripts": {
-    "prebuild": "rm -rf lib/",
+    "clean": "rm -rf lib/",
+    "prebuild": "npm run clean",
     "build": "babel src -d ./lib --source-maps",
     "prepublishOnly": "npm run build"
   },

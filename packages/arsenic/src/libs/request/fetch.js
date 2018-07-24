@@ -31,7 +31,7 @@ fetch.callback((response) => {
 });
 
 fetch.headers({
-  'User-Agent': 'node-fetch/1.0 autofetch/3 arsenic/1 node beesport/4 like(BeeSport/3.0-660.1 (iPhone6; iOS/9.3))'
+  'User-Agent': 'node-fetch/1.0 autofetch/3 arsenic/1 node like(iPhone6; iOS/9.3)'
 });
 
 module.exports = fetch;
