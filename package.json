@@ -1,6 +1,6 @@
 {
   "name": "arsenic",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "description": "arsenic--a nodejs framework",
   "main": "src/index.js",
@@ -21,8 +21,8 @@
   "author": "yeliex",
   "license": "MIT",
   "devDependencies": {
-    "@yeliex/arsenic": "^1.1.0",
-    "@yeliex/arsenic-foundation": "^1.1.0",
+    "@yeliex/arsenic": "^1.1.1",
+    "@yeliex/arsenic-foundation": "^1.1.1",
     "babel-eslint": "^8.2.6",
     "chai": "^4.1.1",
     "eslint": "^4.8.0",
