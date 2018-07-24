@@ -26,7 +26,7 @@
   Router 主要用来描述请求 URL 和具体承担执行动作的 Controller 的对应关系
   ```ecmascript 6
   // router/user.js
-  const router = require("arsenic").router();
+  const router = require("@yeliex/arsenic").router();
   
   router.mount('/user', ctx => ctx.controller.user );
     // ctx.get('/users', ctx => ctx.controller.user.list);
@@ -54,7 +54,7 @@
   
   ```ecmascript 6
   // controller/user/index.js
-  const Context = require('arsenic').Context;
+  const Context = require('@yeliex/arsenic').Context;
   
   class UserController extends Context {
     list() {
@@ -92,7 +92,7 @@
   
   ```ecmascript 6
   // service/user/index.js
-  const Context = require('arsenic').Context;
+  const Context = require('@yeliex/arsenic').Context;
   
   class UserService extends Context {
     getUserList(){
