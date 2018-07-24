@@ -1,6 +1,6 @@
 {
   "name": "@yeliex/arsenic-foundation",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "arsenic node foundations",
   "main": "lib/index.js",
   "files": [
@@ -21,6 +21,7 @@
     "type": "git",
     "url": "git@github.com:yeliex/arsenic.git"
   },
+  "homepage": "https://github.com/yeliex/arsenic",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
