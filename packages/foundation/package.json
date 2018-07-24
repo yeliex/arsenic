@@ -6,6 +6,7 @@
   "files": [
     "lib",
     "src",
+    "test",
     "package.json",
     "yarn.lock",
     "readme.md"
